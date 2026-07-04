@@ -1,5 +1,5 @@
 const CACHE_NAME = "frank-static-v1";
-const CORE_ASSETS = ["/", "/icon.svg", "/images/frank-hero.png", "/images/frank-lookbook.png"];
+const CORE_ASSETS = ["/", "/icon.svg", "/images/frank-hero.webp", "/images/frank-lookbook.webp"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

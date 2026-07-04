@@ -45,7 +45,7 @@ type Product = {
   price: number;
   color: string;
   sizes: string[];
-  image: "/images/frank-hero.png" | "/images/frank-lookbook.png";
+  image: "/images/frank-hero.webp" | "/images/frank-lookbook.webp";
   ratio: "portrait" | "wide" | "square";
   note: string;
 };
@@ -60,7 +60,7 @@ const products: Product[] = [
     price: 188,
     color: "Muted Olive",
     sizes: ["S", "M", "L", "XL"],
-    image: "/images/frank-lookbook.png",
+    image: "/images/frank-lookbook.webp",
     ratio: "portrait",
     note: "Garment-dyed cotton twill with a relaxed architectural drape.",
   },
@@ -71,7 +71,7 @@ const products: Product[] = [
     price: 264,
     color: "Black",
     sizes: ["S", "M", "L"],
-    image: "/images/frank-hero.png",
+    image: "/images/frank-hero.webp",
     ratio: "wide",
     note: "Quiet weather layer with concealed closure and soft structure.",
   },
@@ -82,7 +82,7 @@ const products: Product[] = [
     price: 146,
     color: "Warm White",
     sizes: ["XS", "S", "M", "L"],
-    image: "/images/frank-lookbook.png",
+    image: "/images/frank-lookbook.webp",
     ratio: "square",
     note: "Dense cotton knit built for daily wear and low-effort polish.",
   },
@@ -93,7 +93,7 @@ const products: Product[] = [
     price: 172,
     color: "Charcoal",
     sizes: ["28", "30", "32", "34"],
-    image: "/images/frank-hero.png",
+    image: "/images/frank-hero.webp",
     ratio: "portrait",
     note: "A wide leg trouser with soft volume and clean front breaks.",
   },
@@ -240,7 +240,7 @@ export function FrankStorefront() {
           </div>
         </div>
         <div className="relative min-h-[58vh] lg:min-h-[calc(92vh-5rem)]" data-cursor="VIEW">
-          <Image src="/images/frank-hero.png" alt="FRANK editorial campaign in concrete architecture" fill priority loading="eager" sizes="(min-width: 1024px) 55vw, 100vw" className="object-cover object-top" />
+          <Image src="/images/frank-hero.webp" alt="FRANK editorial campaign in concrete architecture" fill priority loading="eager" sizes="(min-width: 1024px) 55vw, 100vw" className="object-cover object-top" />
           <div className="absolute bottom-6 left-5 right-5 flex items-end justify-between gap-4 text-white sm:left-8 sm:right-8">
             <p className="max-w-40 text-xs uppercase leading-5">Campaign 01 Concrete Light</p>
             <p className="max-w-56 text-right text-sm">Designed For Everyday</p>
@@ -317,7 +317,7 @@ export function FrankStorefront() {
 
       <section id="lookbook" className="grid min-h-screen bg-[var(--frank-black)] text-white lg:grid-cols-[1.18fr_0.82fr]">
         <div className="relative min-h-[62vh]" data-cursor="VIEW">
-          <Image src="/images/frank-lookbook.png" alt="FRANK lookbook in a quiet apartment interior" fill sizes="(min-width: 1024px) 58vw, 100vw" className="object-cover" />
+          <Image src="/images/frank-lookbook.webp" alt="FRANK lookbook in a quiet apartment interior" fill sizes="(min-width: 1024px) 58vw, 100vw" className="object-cover" />
         </div>
         <div className="flex flex-col justify-between px-5 py-14 sm:px-8 lg:px-12">
           <div>
@@ -424,7 +424,7 @@ function MobileMenu({ open, onOpenChange }: { open: boolean; onOpenChange: (open
           aria-modal="true"
           aria-label="Mobile navigation"
         >
-          <Image src="/images/frank-lookbook.png" alt="" fill sizes="100vw" className="object-cover opacity-[0.22]" />
+          <Image src="/images/frank-lookbook.webp" alt="" fill sizes="100vw" className="object-cover opacity-[0.22]" />
           <div className="absolute inset-0 bg-black/58" />
           <div className="relative z-10 flex min-h-full flex-col px-6 py-8">
             <div className="flex items-center justify-between">
