@@ -1,5 +1,5 @@
-const CACHE_NAME = "frnk-static-v1";
-const CORE_ASSETS = ["/", "/icon.svg", "/images/frnk-hero.webp", "/images/frnk-lookbook.webp"];
+const CACHE_NAME = "frnk-static-v2";
+const CORE_ASSETS = ["/icon.svg", "/images/frnk-hero.webp", "/images/frnk-lookbook.webp"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -21,6 +21,11 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") {
+    return;
+  }
+
+  if (event.request.mode === "navigate") {
+    event.respondWith(fetch(event.request));
     return;
   }
 
