@@ -520,46 +520,64 @@ function IconButton({
 
 function MobileMenu({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {open && (
         <motion.div
           className="fixed inset-0 z-[80] overflow-y-auto bg-[var(--frnk-black)] text-white"
-          initial={{ opacity: 0, x: -24 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -24 }}
-          transition={{ duration: 0.25, ease: "easeOut" }}
+          initial={{ x: "-100%" }}
+          animate={{ x: 0 }}
+          exit={{ x: "-100%" }}
+          transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
           role="dialog"
           aria-modal="true"
           aria-label="Mobile navigation"
         >
-          <Image src="/images/frnkplus-exclusive-streetwear-cap.webp" alt="" fill sizes="100vw" className="object-cover object-center opacity-[0.26]" />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,4,3,0.78)_0%,rgba(5,4,3,0.92)_58%,#050403_100%)]" />
-          <div className="absolute left-5 top-24 text-[27vw] font-semibold leading-[0.72] tracking-[0.08em] text-white/8">
+          <Image src="/images/frnkplus-exclusive-streetwear-cap.webp" alt="" fill sizes="100vw" className="object-cover object-center opacity-[0.18]" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,4,3,0.84)_0%,rgba(5,4,3,0.94)_58%,#050403_100%)]" />
+          <div className="absolute left-5 top-28 text-[20vw] font-semibold leading-[0.72] tracking-[0.08em] text-white/[0.05]">
             FR<br />NK
           </div>
-          <div className="relative z-10 flex min-h-full flex-col px-6 py-8">
+          <div className="relative z-10 flex min-h-full flex-col px-5 py-5">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-3xl font-semibold tracking-[0.18em] text-white">FRNK<span className="text-[var(--frnk-tan)]">+</span></p>
-                <p className="mt-2 max-w-44 text-xs uppercase leading-5 tracking-[0.18em] text-[var(--frnk-tan)]">Exclusive streetwear system</p>
+                <p className="text-[1.65rem] font-semibold tracking-[0.18em] text-white">FRNK<span className="text-[var(--frnk-tan)]">+</span></p>
+                <p className="mt-2 max-w-40 text-[10px] uppercase leading-4 tracking-[0.2em] text-[var(--frnk-tan)]">Exclusive streetwear system</p>
               </div>
               <Button variant="ghost" size="icon-lg" className="rounded-none text-white hover:bg-white/10 hover:text-white" onClick={() => onOpenChange(false)}>
                 <X />
                 <span className="sr-only">Close menu</span>
               </Button>
             </div>
-            <div className="mt-12 grid gap-3 pb-8">
+            <motion.div
+              className="mt-6 grid pb-4"
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={{
+                open: { transition: { staggerChildren: 0.035, delayChildren: 0.08 } },
+                closed: { transition: { staggerChildren: 0.02, staggerDirection: -1 } },
+              }}
+            >
               {navItems.map(([label, href], index) => (
-                <Link key={href} href={href} onClick={() => onOpenChange(false)} className="group grid grid-cols-[2.5rem_1fr] items-end border-b border-white/10 py-3">
-                  <span className="pb-1 text-[10px] uppercase tracking-[0.22em] text-white/34">{String(index + 1).padStart(2, "0")}</span>
-                  <span className="text-[clamp(2.25rem,12vw,4.6rem)] font-semibold leading-[0.82] text-white transition group-hover:text-[var(--frnk-tan)]">{label}</span>
-                </Link>
+                <motion.div
+                  key={href}
+                  variants={{
+                    open: { opacity: 1, x: 0 },
+                    closed: { opacity: 0, x: -24 },
+                  }}
+                  transition={{ duration: 0.28, ease: "easeOut" }}
+                >
+                  <Link href={href} onClick={() => onOpenChange(false)} className="group grid grid-cols-[2rem_1fr] items-end border-b border-white/10 py-2">
+                    <span className="pb-1 text-[9px] uppercase tracking-[0.22em] text-white/30">{String(index + 1).padStart(2, "0")}</span>
+                    <span className="text-[clamp(1.72rem,7.8vw,2.85rem)] font-semibold leading-[0.9] text-white transition group-hover:text-[var(--frnk-tan)]">{label}</span>
+                  </Link>
+                </motion.div>
               ))}
-            </div>
-            <Link href="/exclusive" onClick={() => onOpenChange(false)} className="mt-auto grid gap-3 border border-white/12 bg-white/8 p-4 backdrop-blur-md">
+            </motion.div>
+            <Link href="/exclusive" onClick={() => onOpenChange(false)} className="mt-auto grid gap-2 border border-white/12 bg-white/8 p-3.5 backdrop-blur-md">
               <span className="text-[10px] uppercase tracking-[0.22em] text-[var(--frnk-tan)]">Official exclusive</span>
-              <span className="text-2xl font-semibold leading-none">Streetwear Cap</span>
-              <span className="text-sm text-white/52">Limited accessory. Built different. Move silent.</span>
+              <span className="text-lg font-semibold leading-none">Streetwear Cap</span>
+              <span className="text-xs leading-5 text-white/52">Limited accessory. Move silent.</span>
             </Link>
           </div>
         </motion.div>
