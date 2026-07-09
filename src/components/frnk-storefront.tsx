@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import {
   ArrowRight,
   Heart,
@@ -13,7 +13,7 @@ import {
   UserRound,
   X,
 } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { subscribeToNewsletter } from "@/app/actions";
 import { Button } from "@/components/ui/button";
@@ -44,11 +44,10 @@ type Product = {
   color: string;
   sizes: string[];
   image: "/images/frnk-hero.webp" | "/images/frnk-lookbook.webp";
-  ratio: "portrait" | "wide" | "square";
   note: string;
 };
 
-const navItems = ["Cover", "Index", "Runway", "Notes", "Join"];
+const navItems = ["Signal", "Lab", "Forms", "Diary", "Access"];
 
 const products: Product[] = [
   {
@@ -59,7 +58,6 @@ const products: Product[] = [
     color: "Muted Olive",
     sizes: ["S", "M", "L", "XL"],
     image: "/images/frnk-lookbook.webp",
-    ratio: "portrait",
     note: "Garment-dyed cotton twill with a relaxed architectural drape.",
   },
   {
@@ -70,7 +68,6 @@ const products: Product[] = [
     color: "Black",
     sizes: ["S", "M", "L"],
     image: "/images/frnk-hero.webp",
-    ratio: "wide",
     note: "Quiet weather layer with concealed closure and soft structure.",
   },
   {
@@ -81,7 +78,6 @@ const products: Product[] = [
     color: "Warm White",
     sizes: ["XS", "S", "M", "L"],
     image: "/images/frnk-lookbook.webp",
-    ratio: "square",
     note: "Dense cotton knit built for daily wear and low-effort polish.",
   },
   {
@@ -92,22 +88,14 @@ const products: Product[] = [
     color: "Charcoal",
     sizes: ["28", "30", "32", "34"],
     image: "/images/frnk-hero.webp",
-    ratio: "portrait",
     note: "A wide leg trouser with soft volume and clean front breaks.",
   },
 ];
 
-const productPlacements = [
-  "lg:left-[4%] lg:top-[18%] lg:w-[24%]",
-  "lg:left-[34%] lg:top-[4%] lg:w-[38%]",
-  "lg:right-[6%] lg:top-[36%] lg:w-[22%]",
-  "lg:left-[18%] lg:bottom-[2%] lg:w-[28%]",
-];
-
-const fieldNotes = [
-  ["001", "Clothes as atmosphere.", "Built for daily repetition without becoming invisible."],
-  ["002", "The missing letter is a posture.", "Not absence. Edit. Refusal. Precision."],
-  ["003", "Quiet can still be radical.", "The silhouette speaks before the logo ever does."],
+const diary = [
+  ["No alphabet required.", "Identity appears when something expected is removed."],
+  ["Built like silence.", "Flat seams, heavier cloth, proportion that does not beg."],
+  ["Ordinary days. Strange presence.", "The uniform becomes memorable because it refuses decoration."],
 ];
 
 function formatPrice(value: number) {
@@ -125,16 +113,11 @@ export function FrnkStorefront() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [quickView, setQuickView] = useState<Product | null>(null);
   const [wishlist, setWishlist] = useState<string[]>([]);
+  const [activeIndex, setActiveIndex] = useState(1);
   const [cart, setCart] = useState<Record<string, number>>({ "overshirt-01": 1 });
   const [cursor, setCursor] = useState({ x: 0, y: 0, label: "" });
   const reduceMotion = useReducedMotion();
-  const coverRef = useRef<HTMLElement | null>(null);
-  const { scrollYProgress } = useScroll({
-    target: coverRef,
-    offset: ["start start", "end start"],
-  });
-  const coverScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
-  const coverLift = useTransform(scrollYProgress, [0, 1], [0, -90]);
+  const activeProduct = products[activeIndex];
 
   const cartItems = useMemo(
     () => products.filter((product) => cart[product.id]).map((product) => ({ ...product, qty: cart[product.id] })),
@@ -175,12 +158,13 @@ export function FrnkStorefront() {
     <main className="min-h-screen overflow-x-hidden bg-[var(--frnk-warm)] text-[var(--frnk-black)]">
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none fixed left-0 top-0 z-[90] hidden size-8 items-center justify-center rounded-full border border-white/35 bg-black/85 text-[10px] font-medium text-white shadow-2xl backdrop-blur-md lg:flex"
+        className="pointer-events-none fixed left-0 top-0 z-[90] hidden items-center justify-center border border-white/35 bg-black text-[10px] font-medium uppercase text-white shadow-2xl lg:flex"
         animate={{
-          x: cursor.x - (cursor.label ? 35 : 16),
-          y: cursor.y - (cursor.label ? 35 : 16),
-          width: cursor.label ? 70 : 32,
-          height: cursor.label ? 70 : 32,
+          x: cursor.x - (cursor.label ? 38 : 16),
+          y: cursor.y - (cursor.label ? 38 : 16),
+          width: cursor.label ? 76 : 32,
+          height: cursor.label ? 76 : 32,
+          rotate: cursor.label ? -8 : 0,
         }}
         transition={{ type: "spring", stiffness: 420, damping: 34 }}
       >
@@ -190,16 +174,16 @@ export function FrnkStorefront() {
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-40 transition-all duration-300",
-          scrolled ? "border-b border-black/10 bg-[var(--frnk-warm)]/86 backdrop-blur-xl" : "bg-transparent text-white mix-blend-difference",
+          scrolled ? "border-b border-black/10 bg-[var(--frnk-warm)]/88 backdrop-blur-xl" : "bg-transparent",
         )}
       >
         <nav className="mx-auto grid h-18 max-w-[1800px] grid-cols-[1fr_auto_1fr] items-center px-5 sm:px-8 lg:px-12">
-          <a href="#cover" className="text-2xl font-semibold tracking-[0.2em]" aria-label="FRNK home">
+          <a href="#signal" className="text-2xl font-semibold tracking-[0.24em]" aria-label="FRNK home">
             FRNK
           </a>
-          <div className="hidden items-center gap-7 text-[11px] uppercase lg:flex">
+          <div className="hidden items-center gap-7 text-[11px] uppercase text-black/58 lg:flex">
             {navItems.map((item) => (
-              <a key={item} href={`#${item.toLowerCase()}`} className="transition hover:opacity-55">
+              <a key={item} href={`#${item.toLowerCase()}`} className="transition hover:text-black">
                 {item}
               </a>
             ))}
@@ -224,204 +208,207 @@ export function FrnkStorefront() {
         </nav>
       </header>
 
-      <section ref={coverRef} id="cover" className="relative min-h-[100svh] overflow-hidden bg-black text-white">
-        <motion.div style={reduceMotion ? undefined : { scale: coverScale, y: coverLift }} className="absolute inset-0">
-          <Image src="/images/frnk-hero.webp" alt="FRNK campaign cover" fill priority loading="eager" sizes="100vw" className="object-cover object-top opacity-80" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_68%_28%,transparent_0,rgba(0,0,0,0.12)_26%,rgba(0,0,0,0.72)_72%)]" />
-        </motion.div>
-
-        <div className="relative z-10 mx-auto grid min-h-[100svh] max-w-[1800px] grid-cols-6 content-between px-5 pb-8 pt-24 sm:px-8 lg:grid-cols-12 lg:px-12">
+      <section id="signal" className="relative min-h-[100svh] overflow-hidden bg-[var(--frnk-warm)] pt-18">
+        <div className="absolute inset-y-0 left-0 hidden w-[34vw] bg-black lg:block" />
+        <div className="absolute right-[-10vw] top-[6vh] hidden text-[34vw] font-semibold leading-none text-black/[0.04] lg:block">A</div>
+        <div className="mx-auto grid min-h-[calc(100svh-4.5rem)] max-w-[1800px] px-5 pb-8 sm:px-8 lg:grid-cols-12 lg:px-12">
           <motion.div
-            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, ease: "easeOut" }}
-            className="col-span-6 lg:col-span-4 lg:col-start-9"
+            initial={reduceMotion ? false : { opacity: 0, x: -36 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
+            className="relative z-10 hidden py-10 text-white lg:col-span-3 lg:flex lg:flex-col lg:justify-between"
           >
-            <p className="text-xs uppercase leading-5 text-white/60">Issue Zero / Contemporary essentials / No symbol required</p>
+            <p className="text-xs uppercase leading-5 text-white/52">Fashion signal / not a store / no safe template</p>
+            <div className="-rotate-90 origin-left text-[10px] uppercase text-white/48">Scroll to decode the missing letter</div>
           </motion.div>
 
-          <div className="col-span-6 grid gap-8 lg:col-span-12">
+          <div className="relative z-10 grid content-center gap-8 py-10 lg:col-span-5 lg:col-start-4">
+            <motion.p
+              initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="max-w-lg text-xs uppercase leading-5 text-black/52"
+            >
+              New interface. Same restraint. A brand that removes the obvious letter and keeps the attitude.
+            </motion.p>
             <motion.h1
               initial={reduceMotion ? false : { opacity: 0, y: 34 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.08, ease: "easeOut" }}
-              className="text-[clamp(5rem,20vw,23rem)] font-semibold leading-[0.74] tracking-[0.06em]"
+              transition={{ duration: 0.9, delay: 0.08, ease: "easeOut" }}
+              className="text-[clamp(5rem,18vw,18rem)] font-semibold leading-[0.72] tracking-[0.08em]"
             >
-              FRNK
+              FR<br />NK
             </motion.h1>
-            <div className="grid gap-7 lg:grid-cols-12 lg:items-end">
-              <p className="max-w-xl text-2xl leading-9 text-white/84 sm:text-4xl sm:leading-[1.08] lg:col-span-5">
-                A digital fashion campaign for people who notice what is missing.
-              </p>
-              <div className="flex flex-wrap items-center gap-4 lg:col-span-4 lg:col-start-9 lg:justify-end">
-                <Button data-cursor="ENTER" className="h-12 rounded-none bg-white px-7 text-black hover:bg-[var(--frnk-warm)]" onClick={() => document.getElementById("index")?.scrollIntoView({ behavior: "smooth" })}>
-                  Enter the Issue <ArrowRight />
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.18, ease: "easeOut" }}
+              className="flex flex-wrap items-center gap-4"
+            >
+              <Button data-cursor="LAB" className="h-12 rounded-none bg-black px-7 text-white hover:bg-white hover:text-black" onClick={() => document.getElementById("lab")?.scrollIntoView({ behavior: "smooth" })}>
+                Open the Lab <ArrowRight />
+              </Button>
+              <a href="#forms" className="text-sm font-medium underline underline-offset-8">
+                View silhouettes
+              </a>
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, scale: 0.94 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.14, ease: "easeOut" }}
+            className="relative min-h-[56vh] overflow-hidden bg-black shadow-[0_40px_100px_rgba(0,0,0,0.18)] lg:col-span-4 lg:col-start-9 lg:my-20"
+            data-cursor="VIEW"
+          >
+            <Image src="/images/frnk-hero.webp" alt="FRNK fashion signal" fill priority loading="eager" sizes="(min-width: 1024px) 34vw, 100vw" className="object-cover object-top" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/62 via-transparent to-transparent" />
+            <div className="absolute bottom-5 left-5 right-5 flex justify-between gap-4 text-xs uppercase text-white/72">
+              <span>Signal 01</span>
+              <span>Quiet confidence</span>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section id="lab" className="min-h-screen bg-black px-5 py-18 text-white sm:px-8 lg:px-12 lg:py-24">
+        <div className="mx-auto grid max-w-[1800px] gap-8 lg:grid-cols-[0.92fr_1.08fr]">
+          <div className="grid content-between gap-8 border border-white/14 p-5 lg:min-h-[calc(100vh-12rem)] lg:p-8">
+            <div>
+              <p className="text-xs uppercase text-white/44">Interactive garment lab</p>
+              <h2 className="mt-6 max-w-xl text-5xl font-semibold leading-[0.86] sm:text-7xl">Choose by feeling, not category.</h2>
+            </div>
+
+            <div className="grid gap-2">
+              {products.map((product, index) => (
+                <button
+                  key={product.id}
+                  type="button"
+                  onClick={() => setActiveIndex(index)}
+                  onMouseEnter={() => setActiveIndex(index)}
+                  className={cn(
+                    "grid grid-cols-[56px_1fr_auto] items-center gap-4 border-t border-white/12 py-4 text-left transition",
+                    activeIndex === index ? "text-white" : "text-white/42 hover:text-white",
+                  )}
+                >
+                  <span className="text-xs uppercase">{String(index + 1).padStart(2, "0")}</span>
+                  <span className="text-2xl font-medium leading-none sm:text-4xl">{product.name}</span>
+                  <span className="text-sm">{formatPrice(product.price)}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="relative min-h-[720px] overflow-hidden bg-[var(--frnk-warm)] text-black">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeProduct.id}
+                initial={reduceMotion ? false : { opacity: 0, scale: 1.04, x: 28 }}
+                animate={{ opacity: 1, scale: 1, x: 0 }}
+                exit={reduceMotion ? undefined : { opacity: 0, scale: 0.98, x: -28 }}
+                transition={{ duration: 0.55, ease: "easeOut" }}
+                className="absolute inset-0"
+              >
+                <Image src={activeProduct.image} alt={activeProduct.name} fill sizes="(min-width: 1024px) 52vw, 100vw" className="object-cover" />
+              </motion.div>
+            </AnimatePresence>
+            <div className="absolute inset-x-0 bottom-0 grid gap-5 bg-[var(--frnk-warm)]/88 p-5 backdrop-blur md:grid-cols-[1fr_auto] md:items-end lg:p-8">
+              <div>
+                <p className="text-xs uppercase text-black/48">{activeProduct.category} / {activeProduct.color}</p>
+                <h3 className="mt-2 text-4xl font-semibold leading-none sm:text-6xl">{activeProduct.name}</h3>
+                <p className="mt-4 max-w-xl text-lg leading-8 text-black/64">{activeProduct.note}</p>
+              </div>
+              <div className="flex gap-2">
+                <Button className="h-12 rounded-none bg-black px-7 text-white" onClick={() => addToCart(activeProduct.id)}>
+                  Add {formatPrice(activeProduct.price)}
                 </Button>
-                <a href="#runway" className="text-sm font-medium underline underline-offset-8">
-                  Watch the edit
-                </a>
+                <Button variant="outline" size="icon-lg" aria-label={`Wishlist ${activeProduct.name}`} className="h-12 rounded-none" onClick={() => toggleWishlist(activeProduct.id)}>
+                  <Heart className={cn(wishlist.includes(activeProduct.id) && "fill-black")} />
+                </Button>
               </div>
             </div>
           </div>
         </div>
-
-        <div className="absolute bottom-8 right-5 hidden h-48 w-px bg-white/30 lg:block">
-          <span className="absolute -left-10 -top-2 rotate-90 text-[10px] uppercase text-white/52">Scroll</span>
-        </div>
       </section>
 
-      <section id="index" className="relative min-h-screen overflow-hidden px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+      <section id="forms" className="bg-[var(--frnk-warm)] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
         <div className="mx-auto max-w-[1800px]">
-          <div className="grid gap-10 lg:grid-cols-12">
-            <div className="lg:col-span-3">
-              <p className="text-xs uppercase text-black/48">Index of Absence</p>
-              <p className="mt-8 max-w-xs text-lg leading-8 text-black/62">
-                Products are not presented as a grid. They appear like fragments from a campaign wall.
-              </p>
-            </div>
-
-            <motion.h2
-              initial={reduceMotion ? false : { opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-120px" }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-6xl font-semibold leading-[0.82] sm:text-8xl lg:col-span-8 lg:col-start-5 lg:text-[10rem]"
-            >
-              Clothes that leave a trace.
-            </motion.h2>
+          <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
+            <p className="text-xs uppercase text-black/45 lg:col-span-2">Four forms</p>
+            <h2 className="text-6xl font-semibold leading-[0.84] sm:text-8xl lg:col-span-7">No product grid. Just interruptions.</h2>
+            <p className="max-w-sm text-lg leading-8 text-black/62 lg:col-span-3">Each piece enters the page with a different proportion and a different kind of silence.</p>
           </div>
 
-          <div className="relative mt-16 grid gap-10 md:grid-cols-2 lg:h-[1120px] lg:grid-cols-none lg:gap-0">
-            <div className="pointer-events-none absolute left-[47%] top-[8%] hidden h-[78%] w-px rotate-6 bg-black/12 lg:block" />
-            <div className="pointer-events-none absolute left-[8%] top-[42%] hidden h-px w-[74%] -rotate-3 bg-black/12 lg:block" />
-            <p className="pointer-events-none absolute right-[11%] top-[4%] hidden text-[12rem] font-semibold leading-none text-black/[0.035] lg:block">A</p>
-
+          <div className="mt-16 grid gap-6 lg:grid-cols-12">
             {products.map((product, index) => (
-              <motion.article
+              <motion.button
                 key={product.id}
-                initial={reduceMotion ? false : { opacity: 0, y: 42, rotate: index % 2 ? 2 : -2 }}
-                whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+                type="button"
+                initial={reduceMotion ? false : { opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.78, delay: index * 0.08, ease: "easeOut" }}
-                className={cn("group lg:absolute", productPlacements[index])}
+                transition={{ duration: 0.7, delay: index * 0.07, ease: "easeOut" }}
+                onClick={() => setQuickView(product)}
+                className={cn(
+                  "group relative overflow-hidden bg-black text-left text-white",
+                  index === 0 && "min-h-[560px] lg:col-span-4 lg:mt-28",
+                  index === 1 && "min-h-[760px] lg:col-span-5",
+                  index === 2 && "min-h-[440px] lg:col-span-3 lg:mt-52",
+                  index === 3 && "min-h-[520px] lg:col-span-7 lg:col-start-4 lg:-mt-16",
+                )}
                 data-cursor="OPEN"
               >
-                <button
-                  type="button"
-                  onClick={() => setQuickView(product)}
-                  className={cn(
-                    "relative block w-full overflow-hidden bg-[var(--frnk-beige)] text-left shadow-[0_28px_80px_rgba(0,0,0,0.08)]",
-                    product.ratio === "wide" ? "aspect-[1.48]" : product.ratio === "square" ? "aspect-square" : "aspect-[0.72]",
-                  )}
-                >
-                  <Image src={product.image} alt={product.name} fill sizes="(min-width: 1280px) 34vw, (min-width: 768px) 50vw, 100vw" className="object-cover transition duration-700 group-hover:scale-[1.045]" />
-                  <span className="absolute left-4 top-4 bg-white/84 px-3 py-1 text-[11px] uppercase backdrop-blur">{product.category}</span>
-                  <span className="absolute bottom-4 right-4 text-xs uppercase text-white drop-shadow">{`0${index + 1}`}</span>
-                </button>
-                <div className="mt-4 grid grid-cols-[1fr_auto] gap-4">
-                  <div>
-                    <h3 className="text-lg font-medium">{product.name}</h3>
-                    <p className="mt-1 text-sm text-black/55">{product.color}</p>
-                  </div>
-                  <p className="text-sm font-medium">{formatPrice(product.price)}</p>
-                  <div className="col-span-2 flex gap-2">
-                    <Button className="h-10 flex-1 rounded-none bg-black text-white hover:bg-[var(--frnk-olive)]" onClick={() => addToCart(product.id)}>
-                      Add
-                    </Button>
-                    <Button variant="outline" size="icon-lg" aria-label={`Wishlist ${product.name}`} className="rounded-none" onClick={() => toggleWishlist(product.id)}>
-                      <Heart className={cn(wishlist.includes(product.id) && "fill-black")} />
-                    </Button>
-                  </div>
+                <Image src={product.image} alt={product.name} fill sizes="(min-width: 1024px) 48vw, 100vw" className="object-cover transition duration-700 group-hover:scale-[1.04]" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/72 via-black/8 to-transparent" />
+                <div className="absolute bottom-5 left-5 right-5">
+                  <p className="text-xs uppercase text-white/62">{String(index + 1).padStart(2, "0")} / {product.category}</p>
+                  <h3 className="mt-3 max-w-sm text-3xl font-semibold leading-none sm:text-5xl">{product.name}</h3>
                 </div>
-              </motion.article>
+              </motion.button>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="runway" className="relative bg-[var(--frnk-black)] py-20 text-white lg:py-28">
-        <div className="mx-auto max-w-[1800px] px-5 sm:px-8 lg:px-12">
-          <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
-            <h2 className="text-6xl font-semibold leading-[0.82] sm:text-8xl lg:col-span-7">
-              A runway you move by hand.
-            </h2>
-            <p className="max-w-md text-lg leading-8 text-white/62 lg:col-span-3 lg:col-start-10">
-              Drag the frames. Open a piece. Keep the pace personal.
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-14 flex snap-x gap-4 overflow-x-auto px-5 pb-8 sm:px-8 lg:px-12">
-          {[0, 1, 2, 3, 0, 1].map((productIndex, frameIndex) => (
-            <button
-              key={`${productIndex}-${frameIndex}`}
-              type="button"
-              className={cn(
-                "group relative shrink-0 snap-center overflow-hidden bg-white/8 text-left",
-                frameIndex % 3 === 0 && "h-[72vh] w-[74vw] max-w-[700px]",
-                frameIndex % 3 === 1 && "mt-24 h-[48vh] w-[52vw] max-w-[460px]",
-                frameIndex % 3 === 2 && "mt-8 h-[62vh] w-[62vw] max-w-[560px]",
-              )}
-              onClick={() => setQuickView(products[productIndex])}
-              data-cursor="VIEW"
-            >
-              <Image src={frameIndex % 2 === 0 ? "/images/frnk-hero.webp" : "/images/frnk-lookbook.webp"} alt={`FRNK runway frame ${frameIndex + 1}`} fill sizes="80vw" className="object-cover transition duration-700 group-hover:scale-[1.035]" />
-              <span className="absolute left-4 top-4 text-[11px] uppercase text-white/72">Frame {String(frameIndex + 1).padStart(2, "0")}</span>
-              <span className="absolute bottom-4 left-4 max-w-52 text-2xl font-medium leading-none">{products[productIndex].name}</span>
-            </button>
-          ))}
-        </div>
-      </section>
-
-      <section id="notes" className="relative overflow-hidden bg-white">
-        <div className="mx-auto grid max-w-[1800px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[0.82fr_1.18fr] lg:px-12 lg:py-28">
+      <section id="diary" className="relative overflow-hidden bg-white px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+        <div className="absolute left-1/2 top-0 hidden h-full w-px rotate-12 bg-black/10 lg:block" />
+        <div className="mx-auto grid max-w-[1800px] gap-12 lg:grid-cols-[0.8fr_1.2fr]">
           <div className="lg:sticky lg:top-24 lg:h-[calc(100vh-8rem)]">
-            <div className="relative h-full min-h-[520px] overflow-hidden bg-black" data-cursor="READ">
-              <Image src="/images/frnk-lookbook.webp" alt="FRNK studio notes" fill sizes="(min-width: 1024px) 42vw, 100vw" className="object-cover opacity-82" />
-              <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent" />
-              <p className="absolute bottom-5 left-5 max-w-sm text-5xl font-semibold leading-[0.9] text-white sm:text-7xl">Field notes from a quieter room.</p>
-            </div>
+            <p className="text-xs uppercase text-black/45">Brand diary</p>
+            <h2 className="mt-8 text-6xl font-semibold leading-[0.84] sm:text-8xl">The A is gone. The attitude stayed.</h2>
           </div>
-
-          <div className="grid content-start gap-5 lg:pt-32">
-            {fieldNotes.map(([number, title, description], index) => (
+          <div className="grid gap-7 lg:pt-32">
+            {diary.map(([title, text], index) => (
               <motion.article
-                key={number}
-                initial={reduceMotion ? false : { opacity: 0, x: index % 2 ? 48 : -48 }}
+                key={title}
+                initial={reduceMotion ? false : { opacity: 0, x: index % 2 ? 52 : -52 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-120px" }}
-                transition={{ duration: 0.75, ease: "easeOut" }}
-                className={cn(
-                  "grid gap-5 border-t border-black/12 py-9 md:grid-cols-[120px_1fr]",
-                  index === 1 && "md:ml-24",
-                  index === 2 && "md:-ml-10",
-                )}
+                viewport={{ once: true, margin: "-110px" }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+                className={cn("border-t border-black/12 py-8", index === 1 && "lg:ml-28", index === 2 && "lg:-ml-12")}
               >
-                <p className="text-xs uppercase text-black/42">{number}</p>
-                <div>
-                  <h3 className="text-4xl font-semibold leading-none sm:text-6xl">{title}</h3>
-                  <p className="mt-5 max-w-xl text-lg leading-8 text-black/62">{description}</p>
-                </div>
+                <p className="text-xs uppercase text-black/38">0{index + 1}</p>
+                <h3 className="mt-5 text-4xl font-semibold leading-none sm:text-6xl">{title}</h3>
+                <p className="mt-5 max-w-xl text-lg leading-8 text-black/62">{text}</p>
               </motion.article>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="join" className="relative min-h-[92vh] overflow-hidden bg-[var(--frnk-warm)] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
-        <div className="absolute inset-x-0 top-12 text-center text-[clamp(6rem,21vw,22rem)] font-semibold leading-none tracking-[0.05em] text-black/[0.045]">
-          FRNK
-        </div>
-        <div className="relative mx-auto grid min-h-[70vh] max-w-[1800px] gap-10 lg:grid-cols-12 lg:items-end">
+      <section id="access" className="relative min-h-[100svh] overflow-hidden bg-black px-5 py-20 text-white sm:px-8 lg:px-12 lg:py-28">
+        <Image src="/images/frnk-lookbook.webp" alt="FRNK private access" fill sizes="100vw" className="object-cover opacity-28" />
+        <div className="absolute inset-0 bg-black/58" />
+        <div className="relative mx-auto grid min-h-[76vh] max-w-[1800px] gap-10 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <p className="text-xs uppercase text-black/45">Final page</p>
-            <h2 className="mt-8 text-6xl font-semibold leading-[0.84] sm:text-8xl lg:text-[9rem]">Wear what matters.</h2>
+            <p className="text-xs uppercase text-white/45">Private access</p>
+            <h2 className="mt-8 text-6xl font-semibold leading-[0.82] sm:text-8xl lg:text-[9rem]">Less noise. More identity.</h2>
           </div>
-          <form className="grid gap-4 bg-white/72 p-5 shadow-[0_28px_80px_rgba(0,0,0,0.08)] backdrop-blur lg:col-span-4 lg:col-start-9" action={subscribeToNewsletter}>
-            <p className="text-lg leading-8 text-black/62">Receive collection notes, early access, and studio letters.</p>
+          <form className="grid gap-4 border border-white/18 bg-white/8 p-5 backdrop-blur lg:col-span-4 lg:col-start-9" action={subscribeToNewsletter}>
+            <p className="text-lg leading-8 text-white/66">Receive collection notes, early access, and studio letters.</p>
             <div className="flex gap-2">
-              <Input name="email" aria-label="Email address" type="email" placeholder="Email address" className="h-12 rounded-none border-black/15 bg-[var(--frnk-warm)] px-4" />
-              <Button className="h-12 rounded-none bg-black px-6 text-white">Join</Button>
+              <Input name="email" aria-label="Email address" type="email" placeholder="Email address" className="h-12 rounded-none border-white/20 bg-black/40 px-4 text-white placeholder:text-white/42" />
+              <Button className="h-12 rounded-none bg-white px-6 text-black hover:bg-[var(--frnk-warm)]">Join</Button>
             </div>
           </form>
         </div>
@@ -433,7 +420,7 @@ export function FrnkStorefront() {
           <p className="mt-4 max-w-md text-white/55">Premium contemporary fashion for quiet confidence.</p>
         </div>
         <div className="grid grid-cols-2 gap-8 text-sm text-white/62 sm:grid-cols-4">
-          {["Index", "Runway", "Shipping", "Returns"].map((item) => (
+          {["Lab", "Forms", "Shipping", "Returns"].map((item) => (
             <a key={item} href="#" className="hover:text-white">
               {item}
             </a>
@@ -491,7 +478,7 @@ function MobileMenu({ open, onOpenChange }: { open: boolean; onOpenChange: (open
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-3xl font-semibold tracking-[0.18em] text-white">FRNK</p>
-                <p className="mt-1 text-sm text-white/55">Issue Zero</p>
+                <p className="mt-1 text-sm text-white/55">Fashion signal</p>
               </div>
               <Button variant="ghost" size="icon-lg" className="rounded-none text-white hover:bg-white/10 hover:text-white" onClick={() => onOpenChange(false)}>
                 <X />
@@ -631,7 +618,7 @@ function CartSheet({
       <SheetContent className="w-full border-black/10 bg-[var(--frnk-warm)] sm:max-w-md">
         <SheetHeader>
           <SheetTitle className="text-2xl">Cart</SheetTitle>
-          <SheetDescription>Selected pieces from the issue.</SheetDescription>
+          <SheetDescription>Selected pieces from the lab.</SheetDescription>
         </SheetHeader>
         <div className="grid gap-4 px-4">
           <AnimatePresence initial={false}>
