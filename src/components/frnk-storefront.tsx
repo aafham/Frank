@@ -235,7 +235,8 @@ function HomeView({ reduceMotion }: { reduceMotion: boolean | null }) {
           priority
           loading="eager"
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover"
+          style={{ objectPosition: "center 34%" }}
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,4,3,0.82)_0%,rgba(5,4,3,0.28)_42%,rgba(5,4,3,0.76)_100%),linear-gradient(180deg,rgba(5,4,3,0.42)_0%,rgba(5,4,3,0.02)_44%,#050403_100%)]" />
         <motion.div
