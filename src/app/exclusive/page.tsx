@@ -4,9 +4,11 @@ import { notFound } from "next/navigation";
 
 import { getProductBySlug } from "@/lib/frnk-data";
 
+const campaignImage = "/images/frnkplus-exclusive-model-campaign.webp";
+
 export const metadata = {
   title: "Exclusive | FRNK+",
-  description: "FRNK+ official exclusive streetwear cap. A limited accessory for quiet movement.",
+  description: "FRNK+ official exclusive streetwear campaign. Limited pieces for quiet movement.",
 };
 
 export default function ExclusivePage() {
@@ -29,8 +31,8 @@ export default function ExclusivePage() {
       </nav>
 
       <section className="relative isolate min-h-[calc(100svh-4.5rem)] overflow-hidden">
-        <Image src={product.image} alt={product.name} fill priority sizes="100vw" className="object-cover object-center" />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,#050403_0%,rgba(5,4,3,0.72)_38%,rgba(5,4,3,0.18)_100%),linear-gradient(180deg,rgba(5,4,3,0.18)_0%,#050403_100%)]" />
+        <Image src={campaignImage} alt="FRNK+ official exclusive model wearing black cap and sweatshirt" fill priority sizes="100vw" className="object-cover" style={{ objectPosition: "center 28%" }} />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,#050403_0%,rgba(5,4,3,0.72)_38%,rgba(5,4,3,0.2)_100%),linear-gradient(180deg,rgba(5,4,3,0.08)_0%,rgba(5,4,3,0.28)_42%,#050403_100%)]" />
         <div className="relative z-10 mx-auto grid min-h-[calc(100svh-4.5rem)] max-w-[1680px] content-between gap-10 px-5 py-8 sm:px-8 lg:grid-cols-12 lg:px-10">
           <div className="lg:col-span-5">
             <p className="text-xs uppercase tracking-[0.22em] text-[var(--frnk-tan)]">Official exclusive / Core black</p>
@@ -68,6 +70,28 @@ export default function ExclusivePage() {
               <p key={detail}>{detail}</p>
             ))}
             <p>{product.fit}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 py-16 sm:px-8 lg:px-10">
+        <div className="mx-auto grid max-w-[1680px] gap-5 lg:grid-cols-12">
+          <div className="relative min-h-[70vh] overflow-hidden bg-[var(--frnk-coffee)] lg:col-span-7">
+            <Image src={campaignImage} alt="FRNK+ exclusive black uniform campaign" fill sizes="(min-width: 1024px) 58vw, 100vw" className="object-cover" style={{ objectPosition: "center 18%" }} />
+          </div>
+          <div className="grid content-between gap-10 border border-white/10 bg-[#090604] p-5 sm:p-8 lg:col-span-5">
+            <div>
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--frnk-tan)]">Official FRNK+</p>
+              <h2 className="mt-5 text-5xl font-semibold leading-[0.86] sm:text-7xl">Black uniform. Quiet signal.</h2>
+            </div>
+            <div className="grid gap-6">
+              <div className="relative aspect-[1.35] overflow-hidden bg-[var(--frnk-coffee)]">
+                <Image src={product.image} alt={`${product.name} close-up`} fill sizes="(min-width: 1024px) 32vw, 100vw" className="object-cover" />
+              </div>
+              <p className="text-lg leading-8 text-white/62">
+                The cap leads the system. The sweatshirt completes the posture. FRNK+ keeps the mark direct, minimal, and unmistakable.
+              </p>
+            </div>
           </div>
         </div>
       </section>
