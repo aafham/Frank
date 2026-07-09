@@ -614,15 +614,18 @@ function QuickView({
 }) {
   return (
     <Dialog open={Boolean(product)} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-5xl overflow-hidden rounded-none bg-[var(--frnk-black)] p-0 text-white">
+      <DialogContent
+        className="max-h-[calc(100svh-2rem)] overflow-hidden rounded-none border-white/10 bg-[var(--frnk-black)] p-0 text-white"
+        style={{ width: "min(1180px, calc(100vw - 2rem))", maxWidth: "none" }}
+      >
         {product && (
-          <div className="grid lg:grid-cols-[1.08fr_0.92fr]">
-            <div className="relative min-h-[460px] bg-[var(--frnk-coffee)]">
-              <Image src={product.image} alt={product.name} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+          <div className="grid max-h-[calc(100svh-2rem)] overflow-y-auto lg:grid-cols-[minmax(0,1.08fr)_minmax(390px,0.92fr)] lg:overflow-hidden">
+            <div className="relative min-h-[360px] bg-[var(--frnk-coffee)] sm:min-h-[520px] lg:min-h-0">
+              <Image src={product.image} alt={product.name} fill sizes="(min-width: 1024px) 56vw, 100vw" className="object-cover" />
             </div>
-            <div className="flex flex-col justify-between p-6 sm:p-8">
-              <DialogHeader>
-                <DialogTitle className="text-4xl leading-tight">{product.name}</DialogTitle>
+            <div className="flex min-h-0 flex-col p-6 sm:p-8 lg:max-h-[calc(100svh-2rem)] lg:overflow-y-auto">
+              <DialogHeader className="pr-10">
+                <DialogTitle className="text-[clamp(2rem,4vw,4.6rem)] leading-[0.92] tracking-[-0.01em]">{product.name}</DialogTitle>
                 <DialogDescription className="text-base leading-7 text-white/58">{product.note}</DialogDescription>
               </DialogHeader>
               <div className="mt-8 grid gap-6">
@@ -644,6 +647,10 @@ function QuickView({
                   Add To Cart
                 </Button>
                 <div className="grid gap-3 text-sm text-white/56">
+                  <p>{product.fit}</p>
+                  {product.details.map((detail) => (
+                    <p key={detail}>{detail}</p>
+                  ))}
                   <p>Fabric: premium cotton blend selected for structure and softness.</p>
                   <p>Care: cold wash, hang dry, low iron if needed.</p>
                   <p>Shipping: complimentary standard delivery over $150.</p>
