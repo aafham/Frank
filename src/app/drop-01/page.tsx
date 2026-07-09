@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { DropCountdown } from "@/components/drop-countdown";
 import { products } from "@/lib/frnk-data";
 
 export const metadata = {
@@ -58,6 +59,8 @@ export default function DropPage() {
           </div>
         </div>
       </section>
+
+      <DropCountdown />
 
       <section className="mx-auto grid max-w-[1680px] gap-4 px-5 py-14 sm:px-8 md:grid-cols-3 lg:px-10">
         {featured.map((product) => (

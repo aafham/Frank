@@ -18,6 +18,7 @@ import {
 import { useEffect, useMemo, useState } from "react";
 
 import { subscribeToNewsletter } from "@/app/actions";
+import { DropCountdown } from "@/components/drop-countdown";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -226,52 +227,53 @@ function HomeView({ reduceMotion }: { reduceMotion: boolean | null }) {
         </motion.div>
       </div>
 
-      <div className="relative mx-auto hidden min-h-[calc(100svh-4.5rem)] max-w-[1680px] gap-8 px-5 py-8 sm:px-8 lg:grid lg:grid-cols-12 lg:px-10">
+      <div className="relative mx-auto hidden min-h-[calc(100svh-4.5rem)] max-w-[1680px] overflow-hidden px-10 py-10 lg:block">
+        <Image
+          src="/images/frnkplus-hero-black-coat.jpg"
+          alt="FRNK+ model wearing a black coat and sunglasses"
+          fill
+          priority
+          loading="eager"
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,4,3,0.82)_0%,rgba(5,4,3,0.28)_42%,rgba(5,4,3,0.76)_100%),linear-gradient(180deg,rgba(5,4,3,0.42)_0%,rgba(5,4,3,0.02)_44%,#050403_100%)]" />
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.85, ease: "easeOut" }}
-          className="z-10 grid content-center gap-8 lg:col-span-5"
+          className="relative z-10 flex min-h-[calc(100svh-9.5rem)] flex-col justify-between"
         >
-          <p className="max-w-sm text-xs uppercase leading-5 text-[var(--frnk-tan)]">Premium minimal streetwear / Dark brown system / Smart silhouettes</p>
-          <h1 className="text-[clamp(5rem,17vw,17rem)] font-semibold leading-[0.74] tracking-[0.08em]">
-            FR<br />NK
-          </h1>
-          <p className="max-w-xl text-2xl leading-9 text-white/76 sm:text-4xl sm:leading-[1.08]">
-            Clean streetwear for people who dress quiet, sharp, and intentional.
-          </p>
-          <div className="flex flex-wrap items-center gap-4">
-            <Link href="/collection" className="inline-flex h-12 items-center gap-2 bg-[var(--frnk-brown)] px-7 text-sm font-medium text-white transition hover:bg-white hover:text-black">
-              View Collection <ArrowRight className="size-4" />
-            </Link>
-            <Link href="/lookbook" className="text-sm font-medium text-white/72 underline underline-offset-8 hover:text-white">
-              Lookbook
-            </Link>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.95, delay: 0.1, ease: "easeOut" }}
-          className="relative min-h-[55vh] overflow-hidden border border-white/10 bg-[var(--frnk-coffee)] shadow-[0_40px_120px_rgba(0,0,0,0.42)] lg:col-span-5 lg:col-start-7 lg:my-10"
-        >
-          <Image src="/images/frnkplus-hero-black-coat.jpg" alt="FRNK+ model wearing a black coat and sunglasses" fill priority loading="eager" sizes="(min-width: 1024px) 42vw, 100vw" className="object-cover object-center" />
-          <div className="absolute inset-0 bg-linear-to-t from-black/72 via-black/10 to-transparent" />
-          <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4">
-            <div>
-              <p className="text-xs uppercase text-white/52">Drop 01</p>
-              <p className="mt-2 max-w-56 text-2xl font-medium leading-none">Smart clothes. Street posture.</p>
+          <div className="grid grid-cols-12 gap-8">
+            <div className="col-span-5">
+              <p className="max-w-md text-xs uppercase leading-5 tracking-[0.16em] text-[var(--frnk-tan)]">Premium minimal streetwear / Dark brown system / Smart silhouettes</p>
+              <h1 className="mt-10 text-[clamp(8rem,18vw,19rem)] font-semibold leading-[0.72] tracking-[0.08em] text-white drop-shadow-[0_24px_80px_rgba(0,0,0,0.48)]">
+                FR<br />NK
+              </h1>
             </div>
-            <p className="text-right text-xs uppercase text-white/50">Black / Brown / White</p>
+            <div className="col-span-3 col-start-10 self-start border-t border-white/18 pt-5 text-right">
+              <p className="text-xs uppercase leading-6 tracking-[0.18em] text-white/48">Black<br />Brown<br />White</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-12 items-end gap-8 border-t border-white/16 pt-6">
+            <div className="col-span-5">
+              <p className="text-xs uppercase tracking-[0.18em] text-white/48">Drop 01</p>
+              <p className="mt-3 max-w-xl text-5xl font-medium leading-[0.92]">Smart clothes. Street posture.</p>
+            </div>
+            <p className="col-span-4 max-w-lg text-2xl leading-9 text-white/76">
+              Clean streetwear for people who dress quiet, sharp, and intentional.
+            </p>
+            <div className="col-span-3 flex flex-wrap justify-end gap-4">
+              <Link href="/collection" className="inline-flex h-12 items-center gap-2 bg-[var(--frnk-brown)] px-7 text-sm font-medium text-white transition hover:bg-white hover:text-black">
+                View Collection <ArrowRight className="size-4" />
+              </Link>
+              <Link href="/lookbook" className="inline-flex h-12 items-center text-sm font-medium text-white/72 underline underline-offset-8 hover:text-white">
+                Lookbook
+              </Link>
+            </div>
           </div>
         </motion.div>
-
-        <div className="z-10 hidden content-end pb-10 lg:col-span-2 lg:grid">
-          <div className="border-l border-white/12 pl-5">
-            <p className="text-[11px] uppercase leading-5 text-white/42">Explore the drop, lookbook, and product pages without leaving the editorial mood.</p>
-          </div>
-        </div>
       </div>
 
       <section className="relative border-t border-white/10 bg-[#0b0704] px-5 py-16 sm:px-8 lg:px-10 lg:py-24">
@@ -302,6 +304,7 @@ function HomeView({ reduceMotion }: { reduceMotion: boolean | null }) {
           </div>
         </div>
       </section>
+      <DropCountdown />
     </section>
   );
 }

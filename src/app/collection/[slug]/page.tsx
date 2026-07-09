@@ -37,6 +37,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
     notFound();
   }
 
+  const [primaryImage, ...secondaryImages] = product.gallery;
+
   const productJsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -72,16 +74,20 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </Link>
       </nav>
 
-      <section className="mx-auto grid max-w-[1680px] gap-8 px-5 pb-12 pt-6 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:px-10">
+      <section className="mx-auto grid max-w-[1680px] gap-8 px-0 pb-12 pt-0 sm:px-8 sm:pt-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-10">
         <div className="grid gap-4 md:grid-cols-2">
-          {product.gallery.map((image, index) => (
-            <div key={image} className={index === 0 ? "relative min-h-[72vh] overflow-hidden bg-[var(--frnk-coffee)] md:col-span-2" : "relative min-h-[42vh] overflow-hidden bg-[var(--frnk-coffee)]"}>
-              <Image src={image} alt={`${product.name} view ${index + 1}`} fill sizes="(min-width: 1024px) 52vw, 100vw" className="object-cover" />
+          <div className="relative min-h-[78svh] overflow-hidden bg-[var(--frnk-coffee)] sm:min-h-[72vh] md:col-span-2">
+            <Image src={primaryImage} alt={`${product.name} view 1`} fill sizes="(min-width: 1024px) 52vw, 100vw" className="object-cover" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent sm:hidden" />
+          </div>
+          {secondaryImages.map((image, index) => (
+            <div key={image} className="relative hidden min-h-[42vh] overflow-hidden bg-[var(--frnk-coffee)] sm:block">
+              <Image src={image} alt={`${product.name} view ${index + 2}`} fill sizes="(min-width: 1024px) 52vw, 100vw" className="object-cover" />
             </div>
           ))}
         </div>
 
-        <aside className="lg:sticky lg:top-24 lg:h-fit">
+        <aside className="-mt-40 mx-5 border border-white/12 bg-[var(--frnk-black)]/86 p-5 backdrop-blur-xl sm:mx-0 sm:mt-0 sm:border-0 sm:bg-transparent sm:p-0 sm:backdrop-blur-none lg:sticky lg:top-24 lg:h-fit">
           <p className="text-xs uppercase text-[var(--frnk-tan)]">{product.category} / {product.color}</p>
           <h1 className="mt-5 text-5xl font-semibold leading-[0.88] sm:text-7xl">{product.name}</h1>
           <p className="mt-6 max-w-xl text-lg leading-8 text-white/62">{product.note}</p>
@@ -104,6 +110,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
             ))}
           </div>
         </aside>
+
+        <div className="mx-5 grid gap-4 sm:hidden">
+          {secondaryImages.map((image, index) => (
+            <div key={image} className="relative min-h-[42vh] overflow-hidden bg-[var(--frnk-coffee)]">
+              <Image src={image} alt={`${product.name} view ${index + 2}`} fill sizes="100vw" className="object-cover" />
+            </div>
+          ))}
+        </div>
       </section>
     </main>
   );
