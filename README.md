@@ -1,4 +1,4 @@
-# FRNK
+# FRNK+
 
 Premium contemporary fashion storefront built with Next.js, TypeScript, Tailwind CSS, shadcn/ui, Motion, and Lucide icons.
 
