@@ -172,6 +172,8 @@ function Header({
 }
 
 function HomeView({ reduceMotion }: { reduceMotion: boolean | null }) {
+  const exclusiveProduct = products[0];
+
   return (
     <section className="relative min-h-[100svh] overflow-hidden bg-[var(--frnk-black)] pt-18">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_24%,rgba(83,54,34,0.52),transparent_34%),linear-gradient(120deg,#050403_0%,#120c08_48%,#050403_100%)]" />
@@ -306,6 +308,38 @@ function HomeView({ reduceMotion }: { reduceMotion: boolean | null }) {
           </div>
         </div>
       </section>
+      <section className="border-t border-white/10 bg-[var(--frnk-black)] px-5 py-12 sm:px-8 lg:px-10 lg:py-20">
+        <div className="mx-auto grid max-w-[1680px] gap-5 lg:grid-cols-12 lg:items-stretch">
+          <div className="grid content-between gap-8 border border-white/10 bg-[#090604] p-5 sm:p-8 lg:col-span-5">
+            <div>
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--frnk-tan)]">Official exclusive</p>
+              <h2 className="mt-5 text-[clamp(3.2rem,14vw,6rem)] font-semibold leading-[0.86] sm:text-7xl">
+                Cap first.
+                <br />
+                Noise last.
+              </h2>
+            </div>
+            <div className="grid gap-5">
+              <p className="text-base leading-7 text-white/60 sm:text-lg sm:leading-8">
+                The FRNK+ exclusive cap leads the black uniform system. Limited, direct, and built for daily movement.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/exclusive" className="inline-flex h-12 items-center justify-center bg-[var(--frnk-brown)] px-6 text-sm font-medium text-white transition hover:bg-white hover:text-black">
+                  View Exclusive
+                </Link>
+                <Link href={`/collection/${exclusiveProduct.slug}`} className="inline-flex h-12 items-center justify-center border border-white/15 px-6 text-sm font-medium text-white transition hover:bg-white hover:text-black">
+                  Product page
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="relative min-h-[58vh] overflow-hidden bg-[var(--frnk-coffee)] lg:col-span-7">
+            <Image src="/images/frnkplus-exclusive-model-campaign.webp" alt="FRNK+ official exclusive campaign model" fill sizes="(min-width: 1024px) 58vw, 100vw" className="object-cover" style={{ objectPosition: "center 18%" }} />
+            <div className="absolute inset-0 bg-linear-to-t from-black/72 via-black/8 to-transparent" />
+            <p className="absolute bottom-5 left-5 max-w-56 text-3xl font-semibold leading-[0.9]">Official FRNK+ uniform signal.</p>
+          </div>
+        </div>
+      </section>
       <div className="hidden lg:block">
         <DropCountdown />
       </div>
@@ -326,6 +360,8 @@ function CollectionView({
   onQuickView: (product: Product) => void;
   reduceMotion: boolean | null;
 }) {
+  const [featuredProduct, ...standardProducts] = products;
+
   return (
     <section className="min-h-screen bg-[var(--frnk-black)] px-5 pb-12 pt-28 sm:px-8 lg:px-10">
       <div className="mx-auto max-w-[1680px]">
@@ -339,8 +375,42 @@ function CollectionView({
           </p>
         </div>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-          {products.map((product, index) => (
+        <motion.article
+          initial={reduceMotion ? false : { opacity: 0, y: 26 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, ease: "easeOut" }}
+          className="mt-10 grid overflow-hidden border border-white/10 bg-[#090604] md:grid-cols-[1.05fr_0.95fr] lg:mt-12"
+        >
+          <button type="button" onClick={() => onQuickView(featuredProduct)} className="relative block min-h-[58vh] overflow-hidden text-left md:min-h-[520px]">
+            <Image src="/images/frnkplus-exclusive-model-campaign.webp" alt={featuredProduct.name} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" style={{ objectPosition: "center 18%" }} />
+            <div className="absolute inset-0 bg-linear-to-t from-black/72 via-transparent to-transparent" />
+            <span className="absolute left-4 top-4 bg-white px-3 py-1 text-[10px] uppercase tracking-[0.16em] text-black">Exclusive</span>
+          </button>
+          <div className="grid content-between gap-8 p-5 sm:p-8">
+            <div>
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--frnk-tan)]">Official FRNK+ / Drop accessory 001</p>
+              <h2 className="mt-5 text-[clamp(3rem,12vw,5.5rem)] font-semibold leading-[0.86]">{featuredProduct.name}</h2>
+              <p className="mt-5 max-w-xl text-base leading-7 text-white/60 sm:text-lg sm:leading-8">{featuredProduct.note}</p>
+            </div>
+            <div className="grid gap-4">
+              <div className="flex items-center justify-between border-y border-white/10 py-4">
+                <span className="text-sm text-white/54">{featuredProduct.color} / {featuredProduct.sizes.join(" ")}</span>
+                <span>{formatPrice(featuredProduct.price)}</span>
+              </div>
+              <div className="grid grid-cols-[1fr_auto] gap-2">
+                <Button className="h-11 rounded-none bg-[var(--frnk-brown)] text-white hover:bg-white hover:text-black" onClick={() => onAdd(featuredProduct.id)}>
+                  Add exclusive
+                </Button>
+                <Link href={`/collection/${featuredProduct.slug}`} className="inline-flex h-11 items-center border border-white/15 px-4 text-sm text-white transition hover:bg-white hover:text-black">
+                  Details
+                </Link>
+              </div>
+            </div>
+          </div>
+        </motion.article>
+
+        <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          {standardProducts.map((product, index) => (
             <motion.article
               key={product.id}
               initial={reduceMotion ? false : { opacity: 0, y: 26 }}
