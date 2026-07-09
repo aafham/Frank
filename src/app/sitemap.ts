@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 
+import { products } from "@/lib/frnk-data";
+
 const siteUrl = "https://frnkplus.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -16,9 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/returns",
     "/checkout",
     "/access",
-    ...["coffee-puffer-jacket", "black-studio-overshirt", "tailored-street-coat", "goggles-hoodie"].map(
-      (slug) => `/collection/${slug}`,
-    ),
+    ...products.map((product) => `/collection/${product.slug}`),
   ];
 
   return routes.map((route) => ({

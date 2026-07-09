@@ -16,6 +16,21 @@ export type Product = {
 
 export const products: Product[] = [
   {
+    id: "cap-00",
+    slug: "exclusive-streetwear-cap",
+    name: "Exclusive Streetwear Cap",
+    category: "Exclusive",
+    price: 78,
+    color: "Core Black",
+    sizes: ["OS"],
+    stock: { OS: 24 },
+    image: "/images/frnkplus-exclusive-streetwear-cap.png",
+    gallery: ["/images/frnkplus-exclusive-streetwear-cap.png", "/images/frnkplus-cap-jacket.jpg", "/images/frnkplus-black-studio.jpg"],
+    note: "An official FRNK+ exclusive cap with a black body, sharp embroidery, and everyday street posture.",
+    details: ["Premium cotton body", "Six-panel structure", "Adjustable back strap with metal hardware"],
+    fit: "One size. Adjustable strap for a clean daily fit.",
+  },
+  {
     id: "puffer-01",
     slug: "coffee-puffer-jacket",
     name: "Coffee Puffer Jacket",
