@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { BrandLogo } from "@/components/brand-logo";
 import { ProductPurchasePanel } from "@/components/product-purchase-panel";
 import { getProductBySlug, products } from "@/lib/frnk-data";
 
@@ -66,8 +67,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
       />
       <nav className="mx-auto flex h-18 max-w-[1680px] items-center justify-between px-5 sm:px-8 lg:px-10">
-        <Link href="/" className="text-2xl font-semibold tracking-[0.2em]">
-          FRNK<span className="text-[var(--frnk-tan)]">+</span>
+        <Link href="/" className="inline-flex" aria-label="FRNK+ home">
+          <BrandLogo />
         </Link>
         <Link href="/collection" className="text-xs uppercase text-white/58 hover:text-white">
           Back to collection

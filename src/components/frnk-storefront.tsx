@@ -18,6 +18,7 @@ import {
 import { useEffect, useMemo, useState } from "react";
 
 import { subscribeToNewsletter } from "@/app/actions";
+import { BrandLogo } from "@/components/brand-logo";
 import { DropCountdown } from "@/components/drop-countdown";
 import { Button } from "@/components/ui/button";
 import {
@@ -139,8 +140,8 @@ function Header({
       )}
     >
       <nav className="mx-auto grid h-18 max-w-[1680px] grid-cols-[1fr_auto_1fr] items-center px-5 sm:px-8 lg:px-10">
-        <Link href="/" className="text-2xl font-semibold tracking-[0.2em]" aria-label="FRNK+ home">
-          FRNK<span className="text-[var(--frnk-tan)]">+</span>
+        <Link href="/" className="inline-flex items-center" aria-label="FRNK+ home">
+          <BrandLogo />
         </Link>
         <div className="hidden items-center gap-8 text-[11px] uppercase text-white/58 lg:flex">
           {navItems.map(([label, href]) => (
@@ -610,7 +611,7 @@ function MobileMenu({ open, onOpenChange }: { open: boolean; onOpenChange: (open
           <div className="relative z-10 flex min-h-full flex-col px-5 py-5">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-[1.65rem] font-semibold tracking-[0.18em] text-white">FRNK<span className="text-[var(--frnk-tan)]">+</span></p>
+                <BrandLogo size="menu" />
                 <p className="mt-2 max-w-40 text-[10px] uppercase leading-4 tracking-[0.2em] text-[var(--frnk-tan)]">Exclusive streetwear system</p>
               </div>
               <Button variant="ghost" size="icon-lg" className="rounded-none text-white hover:bg-white/10 hover:text-white" onClick={() => onOpenChange(false)}>

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { BrandLogo } from "@/components/brand-logo";
 import { getProductBySlug } from "@/lib/frnk-data";
 
 const campaignImage = "/images/frnkplus-exclusive-model-campaign.webp";
@@ -21,8 +22,8 @@ export default function ExclusivePage() {
   return (
     <main className="min-h-screen bg-[var(--frnk-black)] text-white">
       <nav className="mx-auto flex h-16 max-w-[1680px] items-center justify-between px-5 sm:h-18 sm:px-8 lg:px-10">
-        <Link href="/" className="text-2xl font-semibold tracking-[0.2em]" aria-label="FRNK+ home">
-          FRNK<span className="text-[var(--frnk-tan)]">+</span>
+        <Link href="/" className="inline-flex" aria-label="FRNK+ home">
+          <BrandLogo />
         </Link>
         <div className="flex items-center gap-4 text-[11px] uppercase text-white/58 sm:gap-5 sm:text-xs">
           <Link href="/collection" className="hover:text-white">Collection</Link>

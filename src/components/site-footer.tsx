@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { BrandLogo } from "@/components/brand-logo";
+
 const footerLinks = [
   ["Collection", "/collection"],
   ["Drop 01", "/drop-01"],
@@ -14,8 +16,8 @@ export function SiteFooter() {
     <footer className="border-t border-white/10 bg-[var(--frnk-black)] px-5 py-12 text-white sm:px-8 lg:px-10">
       <div className="mx-auto grid max-w-[1680px] gap-10 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <Link href="/" className="text-5xl font-semibold tracking-[0.18em] sm:text-7xl" aria-label="FRNK+ home">
-            FRNK<span className="text-[var(--frnk-tan)]">+</span>
+          <Link href="/" className="inline-flex" aria-label="FRNK+ home">
+            <BrandLogo size="footer" />
           </Link>
           <p className="mt-6 max-w-md text-lg leading-8 text-white/58">
             Premium minimal streetwear in black, dark brown, and controlled white.
