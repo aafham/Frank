@@ -33,17 +33,17 @@ export function DropCountdown() {
   }, []);
 
   return (
-    <section className="border-y border-white/10 bg-[#090604] px-5 py-12 text-white sm:px-8 lg:px-10">
-      <div className="mx-auto grid max-w-[1680px] gap-8 lg:grid-cols-12 lg:items-end">
+    <section className="border-y border-white/10 bg-[#090604] px-5 py-8 text-white sm:px-8 sm:py-12 lg:px-10">
+      <div className="mx-auto grid max-w-[1680px] gap-6 lg:grid-cols-12 lg:items-end">
         <div className="lg:col-span-4">
           <p className="text-xs uppercase tracking-[0.18em] text-[var(--frnk-tan)]">Drop opens soon</p>
-          <h2 className="mt-4 text-5xl font-semibold leading-[0.86] sm:text-7xl">Pre-launch mode.</h2>
+          <h2 className="mt-3 text-4xl font-semibold leading-[0.88] sm:mt-4 sm:text-7xl">Pre-launch mode.</h2>
         </div>
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:col-span-6 lg:col-start-7">
           {units.map(([label, value]) => (
-            <div key={label} className="border border-white/12 bg-white/[0.03] p-4">
-              <p className="text-4xl font-semibold leading-none sm:text-5xl">{String(value).padStart(2, "0")}</p>
-              <p className="mt-3 text-xs uppercase tracking-[0.16em] text-white/42">{label}</p>
+            <div key={label} className="border border-white/12 bg-white/[0.04] p-3 sm:p-4">
+              <p className="text-3xl font-semibold leading-none sm:text-5xl">{String(value).padStart(2, "0")}</p>
+              <p className="mt-2 text-[10px] uppercase tracking-[0.16em] text-white/42 sm:mt-3 sm:text-xs">{label}</p>
             </div>
           ))}
         </div>

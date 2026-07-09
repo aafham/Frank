@@ -278,35 +278,37 @@ function HomeView({ reduceMotion }: { reduceMotion: boolean | null }) {
         </motion.div>
       </div>
 
-      <section className="relative border-t border-white/10 bg-[#0b0704] px-5 py-16 sm:px-8 lg:px-10 lg:py-24">
-        <div className="mx-auto grid max-w-[1680px] gap-8 lg:grid-cols-12">
+      <section className="relative border-t border-white/10 bg-[#0b0704] px-5 py-12 sm:px-8 sm:py-16 lg:px-10 lg:py-24">
+        <div className="mx-auto grid max-w-[1680px] gap-7 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-4 lg:pt-12">
             <p className="text-xs uppercase tracking-[0.18em] text-[var(--frnk-tan)]">Drop 01 / Dark Brown System</p>
-            <h2 className="mt-5 text-5xl font-semibold leading-[0.86] sm:text-7xl">
+            <h2 className="mt-5 text-[clamp(3.8rem,16vw,5rem)] font-semibold leading-[0.86] sm:text-7xl">
               Streetwear,
               <br />
               edited.
             </h2>
           </div>
-          <div className="relative min-h-[48vh] overflow-hidden border border-white/10 bg-[var(--frnk-coffee)] lg:col-span-5 lg:-mt-8">
+          <div className="relative aspect-[0.8] overflow-hidden border border-white/10 bg-[var(--frnk-coffee)] sm:min-h-[48vh] lg:col-span-5 lg:-mt-8">
             <Image src="/images/frnkplus-brown-puffer.jpg" alt="FRNK+ brown streetwear campaign" fill sizes="(min-width: 1024px) 42vw, 100vw" className="object-cover object-center" />
             <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent" />
-            <p className="absolute bottom-5 left-5 max-w-48 text-2xl font-medium leading-none">Brown becomes the quiet luxury layer.</p>
+            <p className="absolute bottom-5 left-5 max-w-52 text-[1.75rem] font-medium leading-none sm:text-2xl">Brown becomes the quiet luxury layer.</p>
           </div>
-          <div className="grid content-between gap-8 lg:col-span-3 lg:pb-10">
+          <div className="grid content-between gap-6 lg:col-span-3 lg:gap-8 lg:pb-10">
             <div className="ml-auto w-36 border-t border-white/18 pt-4 text-right text-xs uppercase leading-5 text-white/46 sm:w-48">
               Oversized shapes. Sharper finishes. Less noise.
             </div>
-            <div className="relative min-h-64 overflow-hidden border border-white/10 bg-black lg:-ml-16">
+            <div className="relative aspect-[1.18] overflow-hidden border border-white/10 bg-black lg:-ml-16 lg:min-h-64">
               <Image src="/images/frnkplus-tailored-coat.jpg" alt="FRNK+ tailored streetwear coat" fill sizes="(min-width: 1024px) 22vw, 80vw" className="object-cover" />
             </div>
-            <Link href="/drop-01" className="inline-flex h-11 items-center justify-center border border-white/15 px-5 text-sm text-white transition hover:bg-white hover:text-black">
+            <Link href="/drop-01" className="inline-flex h-12 items-center justify-center border border-white/15 px-5 text-sm text-white transition hover:bg-white hover:text-black">
               Enter Drop 01
             </Link>
           </div>
         </div>
       </section>
-      <DropCountdown />
+      <div className="hidden lg:block">
+        <DropCountdown />
+      </div>
     </section>
   );
 }
