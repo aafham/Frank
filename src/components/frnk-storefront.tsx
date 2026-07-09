@@ -202,7 +202,7 @@ function HomeView({ reduceMotion }: { reduceMotion: boolean | null }) {
           transition={{ duration: 0.95, delay: 0.1, ease: "easeOut" }}
           className="relative min-h-[55vh] overflow-hidden border border-white/10 bg-[var(--frnk-coffee)] shadow-[0_40px_120px_rgba(0,0,0,0.42)] lg:col-span-5 lg:col-start-7 lg:my-10"
         >
-          <Image src="/images/frnkplus-black-studio.jpg" alt="FRNK+ model wearing premium minimal streetwear" fill priority loading="eager" sizes="(min-width: 1024px) 42vw, 100vw" className="object-cover object-top" />
+          <Image src="/images/frnkplus-hero-black-coat.jpg" alt="FRNK+ model wearing a black coat and sunglasses" fill priority loading="eager" sizes="(min-width: 1024px) 42vw, 100vw" className="object-cover object-center" />
           <div className="absolute inset-0 bg-linear-to-t from-black/72 via-black/10 to-transparent" />
           <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4">
             <div>

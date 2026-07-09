@@ -41,14 +41,14 @@ export const metadata: Metadata = {
     title: "FRNK+ | Premium Minimal Streetwear",
     description:
       "A premium minimal streetwear experience in black, dark brown, and white.",
-    images: ["/images/frnkplus-black-studio.jpg"],
+    images: ["/images/frnkplus-hero-black-coat.jpg"],
   },
   twitter: {
     card: "summary_large_image",
     title: "FRNK+ | Premium Minimal Streetwear",
     description:
       "Premium minimal streetwear with dark essentials and smart silhouettes.",
-    images: ["/images/frnkplus-black-studio.jpg"],
+    images: ["/images/frnkplus-hero-black-coat.jpg"],
   },
 };
 

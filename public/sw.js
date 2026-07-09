@@ -1,6 +1,7 @@
 const CACHE_NAME = "frnkplus-static-v1";
 const CORE_ASSETS = [
   "/icon.svg",
+  "/images/frnkplus-hero-black-coat.jpg",
   "/images/frnkplus-brown-puffer.jpg",
   "/images/frnkplus-black-studio.jpg",
   "/images/frnkplus-tailored-coat.jpg",
