@@ -16,7 +16,7 @@ function getTimeLeft() {
 }
 
 export function DropCountdown() {
-  const [timeLeft, setTimeLeft] = useState(getTimeLeft);
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const units = useMemo(
     () => [
       ["Days", timeLeft.days],
@@ -28,8 +28,13 @@ export function DropCountdown() {
   );
 
   useEffect(() => {
-    const timer = window.setInterval(() => setTimeLeft(getTimeLeft()), 1000);
-    return () => window.clearInterval(timer);
+    const update = () => setTimeLeft(getTimeLeft());
+    const initial = window.setTimeout(update, 0);
+    const timer = window.setInterval(update, 1000);
+    return () => {
+      window.clearTimeout(initial);
+      window.clearInterval(timer);
+    };
   }, []);
 
   return (
