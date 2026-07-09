@@ -174,7 +174,59 @@ function HomeView({ reduceMotion }: { reduceMotion: boolean | null }) {
     <section className="relative min-h-[100svh] overflow-hidden bg-[var(--frnk-black)] pt-18">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_24%,rgba(83,54,34,0.52),transparent_34%),linear-gradient(120deg,#050403_0%,#120c08_48%,#050403_100%)]" />
       <div className="absolute bottom-0 left-0 h-[42vh] w-[42vh] border border-[var(--frnk-brown)]/30" />
-      <div className="relative mx-auto grid min-h-[calc(100svh-4.5rem)] max-w-[1680px] gap-8 px-5 py-8 sm:px-8 lg:grid-cols-12 lg:px-10">
+
+      <div className="relative min-h-[calc(100svh-4.5rem)] overflow-hidden lg:hidden">
+        <Image
+          src="/images/frnkplus-hero-black-coat.jpg"
+          alt="FRNK+ model wearing a black coat and sunglasses"
+          fill
+          priority
+          loading="eager"
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,4,3,0.18)_0%,rgba(5,4,3,0.06)_34%,rgba(5,4,3,0.78)_78%,#050403_100%)]" />
+        <div className="absolute inset-x-0 top-0 h-52 bg-[linear-gradient(180deg,#050403_0%,rgba(5,4,3,0.2)_100%)]" />
+
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.75, ease: "easeOut" }}
+          className="relative z-10 flex min-h-[calc(100svh-4.5rem)] flex-col justify-between px-5 pb-6 pt-8"
+        >
+          <div>
+            <p className="max-w-[18rem] text-[10px] uppercase leading-5 tracking-[0.16em] text-[var(--frnk-tan)]">
+              Premium minimal streetwear / Dark brown system
+            </p>
+            <h1 className="mt-8 text-[28vw] font-semibold leading-[0.72] tracking-[0.08em] text-white drop-shadow-[0_12px_34px_rgba(0,0,0,0.45)]">
+              FR<br />NK
+            </h1>
+          </div>
+
+          <div className="grid gap-5">
+            <div className="flex items-end justify-between gap-4 border-t border-white/16 pt-4">
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.18em] text-white/48">Drop 01</p>
+                <p className="mt-2 max-w-56 text-2xl font-medium leading-none">Smart clothes. Street posture.</p>
+              </div>
+              <p className="text-right text-[10px] uppercase leading-4 text-white/42">Black<br />Brown<br />White</p>
+            </div>
+            <p className="max-w-[19rem] text-xl leading-7 text-white/78">
+              Clean streetwear for people who dress quiet, sharp, and intentional.
+            </p>
+            <div className="flex items-center gap-3">
+              <Link href="/collection" className="inline-flex h-11 items-center gap-2 bg-[var(--frnk-brown)] px-5 text-sm font-medium text-white transition hover:bg-white hover:text-black">
+                View Collection <ArrowRight className="size-4" />
+              </Link>
+              <Link href="/lookbook" className="text-sm font-medium text-white/72 underline underline-offset-8 hover:text-white">
+                Lookbook
+              </Link>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      <div className="relative mx-auto hidden min-h-[calc(100svh-4.5rem)] max-w-[1680px] gap-8 px-5 py-8 sm:px-8 lg:grid lg:grid-cols-12 lg:px-10">
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
