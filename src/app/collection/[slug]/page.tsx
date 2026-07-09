@@ -37,8 +37,32 @@ export default async function ProductPage({ params }: ProductPageProps) {
     notFound();
   }
 
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.note,
+    brand: {
+      "@type": "Brand",
+      name: "FRNK+",
+    },
+    image: product.gallery.map((image) => `https://frnkplus.vercel.app${image}`),
+    color: product.color,
+    offers: {
+      "@type": "Offer",
+      price: product.price,
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+      url: `https://frnkplus.vercel.app/collection/${product.slug}`,
+    },
+  };
+
   return (
     <main className="min-h-screen bg-[var(--frnk-black)] text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
       <nav className="mx-auto flex h-18 max-w-[1680px] items-center justify-between px-5 sm:px-8 lg:px-10">
         <Link href="/" className="text-2xl font-semibold tracking-[0.2em]">
           FRNK<span className="text-[var(--frnk-tan)]">+</span>

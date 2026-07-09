@@ -11,6 +11,7 @@ import {
   Plus,
   Search,
   ShoppingBag,
+  Trash2,
   UserRound,
   X,
 } from "lucide-react";
@@ -45,6 +46,7 @@ const navItems = [
   ["Collection", "/collection"],
   ["Lookbook", "/lookbook"],
   ["Journal", "/journal"],
+  ["Drop 01", "/drop-01"],
   ["Story", "/story"],
   ["Size", "/size-guide"],
   ["Access", "/access"],
@@ -65,7 +67,7 @@ export function FrnkStorefront({ view = "home" }: { view?: View }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const [quickView, setQuickView] = useState<Product | null>(null);
   const [wishlist, setWishlist] = useState<string[]>([]);
-  const [cart, setCart] = useState<Record<string, number>>({ "overshirt-01": 1 });
+  const [cart, setCart] = useState<Record<string, number>>({ "overshirt-02": 1 });
   const reduceMotion = useReducedMotion();
 
   const cartItems = useMemo(
@@ -149,10 +151,10 @@ function Header({
           <IconButton label="Search" onClick={onSearch}>
             <Search />
           </IconButton>
-          <IconButton label="Wishlist">
+          <IconButton className="hidden sm:inline-flex" label="Wishlist">
             <Heart />
           </IconButton>
-          <IconButton label="Account">
+          <IconButton className="hidden sm:inline-flex" label="Account">
             <UserRound />
           </IconButton>
           <IconButton label={`Cart, ${cartCount} items`} onClick={onCart}>
@@ -215,7 +217,7 @@ function HomeView({ reduceMotion }: { reduceMotion: boolean | null }) {
 
         <div className="z-10 hidden content-end pb-10 lg:col-span-2 lg:grid">
           <div className="border-l border-white/12 pl-5">
-            <p className="text-[11px] uppercase leading-5 text-white/42">No long homepage. Use the menu to enter each page.</p>
+            <p className="text-[11px] uppercase leading-5 text-white/42">Explore the drop, lookbook, and product pages without leaving the editorial mood.</p>
           </div>
         </div>
       </div>
@@ -242,6 +244,9 @@ function HomeView({ reduceMotion }: { reduceMotion: boolean | null }) {
             <div className="relative min-h-64 overflow-hidden border border-white/10 bg-black lg:-ml-16">
               <Image src="/images/frnkplus-tailored-coat.jpg" alt="FRNK+ tailored streetwear coat" fill sizes="(min-width: 1024px) 22vw, 80vw" className="object-cover" />
             </div>
+            <Link href="/drop-01" className="inline-flex h-11 items-center justify-center border border-white/15 px-5 text-sm text-white transition hover:bg-white hover:text-black">
+              Enter Drop 01
+            </Link>
           </div>
         </div>
       </section>
@@ -321,15 +326,20 @@ function CollectionView({
 
 function LookbookView({ onQuickView, reduceMotion }: { onQuickView: (product: Product) => void; reduceMotion: boolean | null }) {
   return (
-    <section className="min-h-screen overflow-hidden bg-[var(--frnk-coffee)] px-5 pb-10 pt-28 text-white sm:px-8 lg:px-10">
-      <div className="mx-auto grid max-w-[1680px] gap-8 lg:grid-cols-12">
-        <div className="lg:col-span-4">
-          <p className="text-xs uppercase text-[var(--frnk-tan)]">Lookbook</p>
-          <h1 className="mt-5 text-5xl font-semibold leading-[0.88] sm:text-7xl">Model, mood, movement.</h1>
-          <p className="mt-6 max-w-sm text-lg leading-8 text-white/58">Smart streetwear shown with dark tones, oversized cuts, and clean confidence.</p>
+    <section className="min-h-screen overflow-hidden bg-[var(--frnk-coffee)] px-5 pb-14 pt-28 text-white sm:px-8 lg:px-10">
+      <div className="mx-auto max-w-[1680px]">
+        <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
+          <div className="lg:col-span-6">
+            <p className="text-xs uppercase text-[var(--frnk-tan)]">Lookbook / Drop 01</p>
+            <h1 className="mt-5 text-6xl font-semibold leading-[0.82] sm:text-8xl">Model, mood, movement.</h1>
+          </div>
+          <p className="max-w-lg text-lg leading-8 text-white/58 lg:col-span-4 lg:col-start-9">
+            A campaign layout for black layers, coffee tones, concrete light, and controlled street posture.
+          </p>
         </div>
-        <div className="grid gap-4 md:grid-cols-2 lg:col-span-8">
-          {lookbookFrames.slice(0, 4).map((frame, index) => (
+
+        <div className="mt-12 grid gap-4 md:grid-cols-6 lg:grid-cols-12">
+          {lookbookFrames.map((frame, index) => (
             <motion.button
               key={frame.title}
               type="button"
@@ -337,18 +347,34 @@ function LookbookView({ onQuickView, reduceMotion }: { onQuickView: (product: Pr
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: index * 0.05, ease: "easeOut" }}
               onClick={() => onQuickView(products[index % products.length])}
-              className={cn("group relative overflow-hidden bg-black text-left", index === 0 && "md:row-span-2", index === 3 && "md:-mt-20")}
+              className={cn(
+                "group relative overflow-hidden bg-black text-left",
+                index === 0 && "md:col-span-4 lg:col-span-5 lg:row-span-2",
+                index === 1 && "md:col-span-2 lg:col-span-3 lg:mt-24",
+                index === 2 && "md:col-span-3 lg:col-span-4",
+                index === 3 && "md:col-span-3 lg:col-span-3 lg:-mt-16",
+                index === 4 && "md:col-span-2 lg:col-span-4",
+                index === 5 && "md:col-span-4 lg:col-span-5 lg:-mt-20",
+              )}
             >
-              <div className={cn("relative", index === 0 ? "h-[72vh]" : "h-[34vh]")}>
+              <div className={cn("relative", index === 0 ? "h-[72vh]" : index === 5 ? "h-[56vh]" : "h-[40vh]")}>
                 <Image src={frame.image} alt={frame.title} fill sizes="(min-width: 1024px) 34vw, 100vw" className="object-cover transition duration-700 group-hover:scale-[1.035]" />
                 <div className="absolute inset-0 bg-linear-to-t from-black/72 via-black/5 to-transparent" />
                 <div className="absolute bottom-4 left-4 max-w-64">
+                  <p className="mb-2 text-[10px] uppercase tracking-[0.18em] text-white/42">Frame 0{index + 1}</p>
                   <p className="text-2xl font-medium leading-none">{frame.title}</p>
                   <p className="mt-2 text-sm text-white/54">{frame.text}</p>
                 </div>
               </div>
             </motion.button>
           ))}
+        </div>
+
+        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-white/12 pt-8">
+          <p className="max-w-sm text-sm uppercase leading-6 tracking-[0.16em] text-white/42">Every frame links back to a product. The shopping layer stays quiet.</p>
+          <Link href="/drop-01" className="inline-flex h-11 items-center gap-2 bg-white px-5 text-sm font-medium text-black transition hover:bg-[var(--frnk-tan)]">
+            View Drop 01 <ArrowRight className="size-4" />
+          </Link>
         </div>
       </div>
     </section>
@@ -402,6 +428,7 @@ function AccessView() {
           <div className="flex flex-wrap gap-4 text-sm text-white/58">
             <Link href="/story" className="underline underline-offset-8 hover:text-white">Brand story</Link>
             <Link href="/size-guide" className="underline underline-offset-8 hover:text-white">Size guide</Link>
+            <Link href="/faq" className="underline underline-offset-8 hover:text-white">FAQ</Link>
             <Link href="/checkout" className="underline underline-offset-8 hover:text-white">Checkout</Link>
           </div>
         </form>
@@ -437,7 +464,7 @@ function MobileMenu({ open, onOpenChange }: { open: boolean; onOpenChange: (open
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-[80] overflow-hidden bg-[var(--frnk-black)] text-white"
+          className="fixed inset-0 z-[80] overflow-y-auto bg-[var(--frnk-black)] text-white"
           initial={{ opacity: 0, x: -24 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -24 }}
@@ -459,9 +486,9 @@ function MobileMenu({ open, onOpenChange }: { open: boolean; onOpenChange: (open
                 <span className="sr-only">Close menu</span>
               </Button>
             </div>
-            <div className="mt-16 grid gap-6">
+            <div className="mt-12 grid gap-5 pb-10">
               {navItems.map(([label, href]) => (
-                <Link key={href} href={href} onClick={() => onOpenChange(false)} className="text-5xl font-semibold leading-none text-white">
+                <Link key={href} href={href} onClick={() => onOpenChange(false)} className="text-4xl font-semibold leading-none text-white sm:text-5xl">
                   {label}
                 </Link>
               ))}
@@ -591,53 +618,77 @@ function CartSheet({
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="w-full border-white/10 bg-[var(--frnk-black)] text-white sm:max-w-md">
         <SheetHeader>
-          <SheetTitle className="text-2xl">Cart</SheetTitle>
-          <SheetDescription className="text-white/52">Selected FRNK+ streetwear pieces.</SheetDescription>
+          <SheetTitle className="text-2xl">Bag</SheetTitle>
+          <SheetDescription className="text-white/52">Selected FRNK+ pieces. Preview only for now.</SheetDescription>
         </SheetHeader>
-        <div className="grid gap-4 px-4">
-          <AnimatePresence initial={false}>
-            {items.map((item) => (
-              <motion.div
-                key={item.id}
-                layout
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="grid grid-cols-[76px_1fr] gap-4 bg-white/8 p-3"
-              >
-                <div className="relative aspect-[0.78] overflow-hidden bg-[var(--frnk-coffee)]">
-                  <Image src={item.image} alt="" fill sizes="76px" className="object-cover" />
-                </div>
-                <div>
-                  <div className="flex justify-between gap-3">
-                    <p className="font-medium">{item.name}</p>
-                    <button type="button" aria-label={`Remove ${item.name}`} onClick={() => setCart((current) => ({ ...current, [item.id]: 0 }))}>
-                      <X className="size-4" />
-                    </button>
+        <div className="grid gap-4 overflow-y-auto px-4">
+          {items.length === 0 ? (
+            <div className="grid min-h-72 place-items-center border border-white/12 p-8 text-center">
+              <div>
+                <p className="text-3xl font-semibold">Your bag is quiet.</p>
+                <p className="mt-3 text-sm leading-6 text-white/48">Add a piece from the collection to start a preview order.</p>
+                <Link href="/collection" onClick={() => onOpenChange(false)} className="mt-6 inline-flex h-11 items-center justify-center bg-white px-5 text-sm font-medium text-black">
+                  View collection
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <AnimatePresence initial={false}>
+              {items.map((item) => (
+                <motion.div
+                  key={item.id}
+                  layout
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="grid grid-cols-[86px_1fr] gap-4 border border-white/10 bg-white/8 p-3"
+                >
+                  <div className="relative aspect-[0.78] overflow-hidden bg-[var(--frnk-coffee)]">
+                    <Image src={item.image} alt="" fill sizes="86px" className="object-cover" />
                   </div>
-                  <p className="mt-1 text-sm text-white/48">{formatPrice(item.price)}</p>
-                  <div className="mt-4 flex items-center gap-2">
-                    <Button variant="outline" size="icon-sm" aria-label="Decrease quantity" className="border-white/15 bg-transparent text-white hover:bg-white hover:text-black" onClick={() => setCart((current) => ({ ...current, [item.id]: Math.max(0, item.qty - 1) }))}>
-                      <Minus />
-                    </Button>
-                    <span className="w-8 text-center text-sm">{item.qty}</span>
-                    <Button variant="outline" size="icon-sm" aria-label="Increase quantity" className="border-white/15 bg-transparent text-white hover:bg-white hover:text-black" onClick={() => setCart((current) => ({ ...current, [item.id]: item.qty + 1 }))}>
-                      <Plus />
-                    </Button>
+                  <div>
+                    <div className="flex justify-between gap-3">
+                      <div>
+                        <p className="font-medium">{item.name}</p>
+                        <p className="mt-1 text-xs uppercase tracking-[0.14em] text-white/38">{item.color} / Size M</p>
+                      </div>
+                      <button type="button" aria-label={`Remove ${item.name}`} onClick={() => setCart((current) => ({ ...current, [item.id]: 0 }))}>
+                        <Trash2 className="size-4" />
+                      </button>
+                    </div>
+                    <p className="mt-3 text-sm text-white/64">{formatPrice(item.price)}</p>
+                    <div className="mt-4 flex items-center gap-2">
+                      <Button variant="outline" size="icon-sm" aria-label="Decrease quantity" className="border-white/15 bg-transparent text-white hover:bg-white hover:text-black" onClick={() => setCart((current) => ({ ...current, [item.id]: Math.max(0, item.qty - 1) }))}>
+                        <Minus />
+                      </Button>
+                      <span className="w-8 text-center text-sm">{item.qty}</span>
+                      <Button variant="outline" size="icon-sm" aria-label="Increase quantity" className="border-white/15 bg-transparent text-white hover:bg-white hover:text-black" onClick={() => setCart((current) => ({ ...current, [item.id]: item.qty + 1 }))}>
+                        <Plus />
+                      </Button>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          )}
         </div>
         <SheetFooter>
-          <div className="flex justify-between border-t border-white/10 pt-4">
-            <span>Subtotal</span>
-            <span>{formatPrice(total)}</span>
+          <div className="grid gap-3 border-t border-white/10 pt-4 text-sm">
+            <div className="flex justify-between">
+              <span className="text-white/58">Subtotal</span>
+              <span>{formatPrice(total)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-white/58">Delivery</span>
+              <span>{total >= 150 ? "Included" : "Preview"}</span>
+            </div>
           </div>
-          <Button className="h-12 rounded-none bg-[var(--frnk-brown)] text-white hover:bg-white hover:text-black">
-            <Link href="/checkout">Checkout</Link>
+          <Button className="h-12 rounded-none bg-[var(--frnk-brown)] text-white hover:bg-white hover:text-black" disabled={items.length === 0}>
+            <Link href="/checkout" onClick={() => onOpenChange(false)}>Checkout preview</Link>
           </Button>
+          <Link href="/collection" onClick={() => onOpenChange(false)} className="text-center text-sm text-white/54 underline underline-offset-8 hover:text-white">
+            Continue shopping
+          </Link>
         </SheetFooter>
       </SheetContent>
     </Sheet>

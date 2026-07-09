@@ -1,0 +1,31 @@
+import Link from "next/link";
+
+export const metadata = {
+  title: "Returns | FRNK+",
+  description: "FRNK+ returns policy preview.",
+};
+
+export default function ReturnsPage() {
+  return (
+    <main className="min-h-screen bg-[var(--frnk-black)] px-5 py-10 text-white sm:px-8 lg:px-10">
+      <nav className="mx-auto flex max-w-[1680px] items-center justify-between">
+        <Link href="/" className="text-2xl font-semibold tracking-[0.2em]">
+          FRNK<span className="text-[var(--frnk-tan)]">+</span>
+        </Link>
+        <Link href="/faq" className="text-xs uppercase text-white/58 hover:text-white">
+          FAQ
+        </Link>
+      </nav>
+
+      <section className="mx-auto mt-20 max-w-4xl">
+        <p className="text-xs uppercase text-[var(--frnk-tan)]">Policy preview</p>
+        <h1 className="mt-5 text-6xl font-semibold leading-[0.84] sm:text-8xl">Returns</h1>
+        <div className="mt-10 grid gap-6 text-lg leading-8 text-white/62">
+          <p>Returns are currently shown as a preview policy while FRNK+ is not accepting real payments.</p>
+          <p>Recommended launch rule: 14-day returns on unworn pieces with original tags and packaging.</p>
+          <p>Final return handling should be connected after payment, orders, and customer email systems are live.</p>
+        </div>
+      </section>
+    </main>
+  );
+}

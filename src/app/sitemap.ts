@@ -8,8 +8,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/collection",
     "/lookbook",
     "/journal",
+    "/drop-01",
     "/story",
     "/size-guide",
+    "/faq",
+    "/shipping",
+    "/returns",
     "/checkout",
     "/access",
     ...["coffee-puffer-jacket", "black-studio-overshirt", "tailored-street-coat", "goggles-hoodie"].map(
