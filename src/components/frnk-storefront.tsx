@@ -44,6 +44,7 @@ type View = "home" | "collection" | "lookbook" | "journal" | "access";
 
 const navItems = [
   ["Home", "/"],
+  ["Exclusive", "/exclusive"],
   ["Collection", "/collection"],
   ["Lookbook", "/lookbook"],
   ["Journal", "/journal"],
@@ -529,26 +530,35 @@ function MobileMenu({ open, onOpenChange }: { open: boolean; onOpenChange: (open
           aria-modal="true"
           aria-label="Mobile navigation"
         >
-          <Image src="/images/frnkplus-brown-puffer.jpg" alt="" fill sizes="100vw" className="object-cover opacity-[0.18]" />
-          <div className="absolute inset-0 bg-black/70" />
+          <Image src="/images/frnkplus-exclusive-streetwear-cap.webp" alt="" fill sizes="100vw" className="object-cover object-center opacity-[0.26]" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,4,3,0.78)_0%,rgba(5,4,3,0.92)_58%,#050403_100%)]" />
+          <div className="absolute left-5 top-24 text-[27vw] font-semibold leading-[0.72] tracking-[0.08em] text-white/8">
+            FR<br />NK
+          </div>
           <div className="relative z-10 flex min-h-full flex-col px-6 py-8">
-            <div className="flex items-center justify-between">
+            <div className="flex items-start justify-between">
               <div>
                 <p className="text-3xl font-semibold tracking-[0.18em] text-white">FRNK<span className="text-[var(--frnk-tan)]">+</span></p>
-                <p className="mt-1 text-sm text-white/55">Minimal streetwear</p>
+                <p className="mt-2 max-w-44 text-xs uppercase leading-5 tracking-[0.18em] text-[var(--frnk-tan)]">Exclusive streetwear system</p>
               </div>
               <Button variant="ghost" size="icon-lg" className="rounded-none text-white hover:bg-white/10 hover:text-white" onClick={() => onOpenChange(false)}>
                 <X />
                 <span className="sr-only">Close menu</span>
               </Button>
             </div>
-            <div className="mt-12 grid gap-5 pb-10">
-              {navItems.map(([label, href]) => (
-                <Link key={href} href={href} onClick={() => onOpenChange(false)} className="text-4xl font-semibold leading-none text-white sm:text-5xl">
-                  {label}
+            <div className="mt-12 grid gap-3 pb-8">
+              {navItems.map(([label, href], index) => (
+                <Link key={href} href={href} onClick={() => onOpenChange(false)} className="group grid grid-cols-[2.5rem_1fr] items-end border-b border-white/10 py-3">
+                  <span className="pb-1 text-[10px] uppercase tracking-[0.22em] text-white/34">{String(index + 1).padStart(2, "0")}</span>
+                  <span className="text-[clamp(2.25rem,12vw,4.6rem)] font-semibold leading-[0.82] text-white transition group-hover:text-[var(--frnk-tan)]">{label}</span>
                 </Link>
               ))}
             </div>
+            <Link href="/exclusive" onClick={() => onOpenChange(false)} className="mt-auto grid gap-3 border border-white/12 bg-white/8 p-4 backdrop-blur-md">
+              <span className="text-[10px] uppercase tracking-[0.22em] text-[var(--frnk-tan)]">Official exclusive</span>
+              <span className="text-2xl font-semibold leading-none">Streetwear Cap</span>
+              <span className="text-sm text-white/52">Limited accessory. Built different. Move silent.</span>
+            </Link>
           </div>
         </motion.div>
       )}

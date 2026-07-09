@@ -7,6 +7,7 @@ const siteUrl = "https://frnkplus.vercel.app";
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
+    "/exclusive",
     "/collection",
     "/lookbook",
     "/journal",
