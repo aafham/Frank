@@ -38,9 +38,9 @@ export default function CheckoutPage() {
             <input className="h-12 bg-black/40 px-4 outline-none ring-1 ring-white/12 focus:ring-[var(--frnk-tan)]" placeholder="Postcode" />
           </div>
           <button type="button" className="h-12 bg-[var(--frnk-brown)] text-sm font-medium transition hover:bg-white hover:text-black">
-            Place order
+            Save order preview
           </button>
-          <p className="text-sm text-white/42">Payment integration placeholder. Connect Stripe keys to make this live.</p>
+          <p className="text-sm text-white/42">Checkout preview only. Real payment and database are intentionally skipped for now.</p>
         </form>
 
         <aside className="border border-white/12 bg-[var(--frnk-coffee)] p-5 lg:p-8">

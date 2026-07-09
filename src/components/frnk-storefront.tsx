@@ -219,6 +219,32 @@ function HomeView({ reduceMotion }: { reduceMotion: boolean | null }) {
           </div>
         </div>
       </div>
+
+      <section className="relative border-t border-white/10 bg-[#0b0704] px-5 py-16 sm:px-8 lg:px-10 lg:py-24">
+        <div className="mx-auto grid max-w-[1680px] gap-8 lg:grid-cols-12">
+          <div className="lg:col-span-4 lg:pt-12">
+            <p className="text-xs uppercase tracking-[0.18em] text-[var(--frnk-tan)]">Drop 01 / Dark Brown System</p>
+            <h2 className="mt-5 text-5xl font-semibold leading-[0.86] sm:text-7xl">
+              Streetwear,
+              <br />
+              edited.
+            </h2>
+          </div>
+          <div className="relative min-h-[48vh] overflow-hidden border border-white/10 bg-[var(--frnk-coffee)] lg:col-span-5 lg:-mt-8">
+            <Image src="/images/frnkplus-brown-puffer.jpg" alt="FRNK+ brown streetwear campaign" fill sizes="(min-width: 1024px) 42vw, 100vw" className="object-cover object-center" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent" />
+            <p className="absolute bottom-5 left-5 max-w-48 text-2xl font-medium leading-none">Brown becomes the quiet luxury layer.</p>
+          </div>
+          <div className="grid content-between gap-8 lg:col-span-3 lg:pb-10">
+            <div className="ml-auto w-36 border-t border-white/18 pt-4 text-right text-xs uppercase leading-5 text-white/46 sm:w-48">
+              Oversized shapes. Sharper finishes. Less noise.
+            </div>
+            <div className="relative min-h-64 overflow-hidden border border-white/10 bg-black lg:-ml-16">
+              <Image src="/images/frnkplus-tailored-coat.jpg" alt="FRNK+ tailored streetwear coat" fill sizes="(min-width: 1024px) 22vw, 80vw" className="object-cover" />
+            </div>
+          </div>
+        </div>
+      </section>
     </section>
   );
 }
@@ -261,12 +287,15 @@ function CollectionView({
               <button type="button" onClick={() => onQuickView(product)} className="relative block aspect-[0.78] w-full overflow-hidden text-left">
                 <Image src={product.image} alt={product.name} fill sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw" className="object-cover transition duration-700 group-hover:scale-[1.04]" />
                 <span className="absolute left-4 top-4 bg-black/72 px-3 py-1 text-[11px] uppercase text-white backdrop-blur">{product.category}</span>
+                <span className="absolute right-4 top-4 bg-white/90 px-3 py-1 text-[10px] uppercase tracking-[0.16em] text-black">
+                  {Object.values(product.stock).reduce((sum, count) => sum + count, 0)} left
+                </span>
               </button>
               <div className="grid gap-4 p-4">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <h2 className="font-medium">{product.name}</h2>
-                    <p className="mt-1 text-sm text-white/48">{product.color}</p>
+                    <p className="mt-1 text-sm text-white/48">{product.color} / {product.sizes.join(" ")}</p>
                   </div>
                   <p className="text-sm">{formatPrice(product.price)}</p>
                 </div>

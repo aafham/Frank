@@ -6,6 +6,7 @@ export type Product = {
   price: number;
   color: string;
   sizes: string[];
+  stock: Record<string, number>;
   image: string;
   gallery: string[];
   note: string;
@@ -22,6 +23,7 @@ export const products: Product[] = [
     price: 228,
     color: "Coffee Brown",
     sizes: ["S", "M", "L", "XL"],
+    stock: { S: 6, M: 9, L: 4, XL: 2 },
     image: "/images/frnkplus-brown-puffer.jpg",
     gallery: ["/images/frnkplus-brown-puffer.jpg", "/images/frnkplus-brown-varsity.jpg", "/images/frnkplus-urban-walk.jpg"],
     note: "A warm street layer with oversized volume and a grounded brown tone.",
@@ -36,6 +38,7 @@ export const products: Product[] = [
     price: 188,
     color: "Washed Black",
     sizes: ["S", "M", "L", "XL"],
+    stock: { S: 5, M: 12, L: 7, XL: 3 },
     image: "/images/frnkplus-black-studio.jpg",
     gallery: ["/images/frnkplus-black-studio.jpg", "/images/frnkplus-cap-jacket.jpg", "/images/frnkplus-denim-wall.jpg"],
     note: "A clean everyday layer with the posture of a jacket and the ease of a shirt.",
@@ -50,6 +53,7 @@ export const products: Product[] = [
     price: 264,
     color: "Taupe Brown",
     sizes: ["S", "M", "L"],
+    stock: { S: 3, M: 5, L: 2 },
     image: "/images/frnkplus-tailored-coat.jpg",
     gallery: ["/images/frnkplus-tailored-coat.jpg", "/images/frnkplus-urban-walk.jpg", "/images/frnkplus-brown-puffer.jpg"],
     note: "Smart tailoring softened for streetwear movement.",
@@ -64,6 +68,7 @@ export const products: Product[] = [
     price: 146,
     color: "Deep Black",
     sizes: ["XS", "S", "M", "L"],
+    stock: { XS: 2, S: 8, M: 6, L: 1 },
     image: "/images/frnkplus-goggles-hoodie.jpg",
     gallery: ["/images/frnkplus-goggles-hoodie.jpg", "/images/frnkplus-cap-jacket.jpg", "/images/frnkplus-black-studio.jpg"],
     note: "Dense fleece with a quiet technical mood and a clean hood shape.",

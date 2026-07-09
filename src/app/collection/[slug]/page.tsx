@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { ProductPurchasePanel } from "@/components/product-purchase-panel";
 import { getProductBySlug, products } from "@/lib/frnk-data";
 
 type ProductPageProps = {
@@ -67,19 +68,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <p className="mt-2 text-lg">{product.fit}</p>
           </div>
 
-          <div className="mt-6">
-            <p className="mb-3 text-sm text-white/52">Size</p>
-            <div className="flex flex-wrap gap-2">
-              {product.sizes.map((size) => (
-                <button key={size} type="button" className="h-11 min-w-12 border border-white/15 px-4 text-sm transition hover:bg-white hover:text-black">
-                  {size}
-                </button>
-              ))}
-            </div>
-          </div>
+          <ProductPurchasePanel product={product} />
 
-          <Link href="/checkout" className="mt-8 inline-flex h-12 w-full items-center justify-center bg-[var(--frnk-brown)] text-sm font-medium text-white transition hover:bg-white hover:text-black">
-            Continue to checkout
+          <Link href="/checkout" className="mt-4 inline-flex h-12 w-full items-center justify-center border border-white/15 text-sm font-medium text-white transition hover:bg-white hover:text-black">
+            Continue to checkout preview
           </Link>
 
           <div className="mt-8 grid gap-3 text-sm leading-6 text-white/58">
