@@ -382,7 +382,7 @@ function CollectionView({
           className="mt-10 grid overflow-hidden border border-white/10 bg-[#090604] md:grid-cols-[1.05fr_0.95fr] lg:mt-12"
         >
           <button type="button" onClick={() => onQuickView(featuredProduct)} className="relative block min-h-[58vh] overflow-hidden text-left md:min-h-[520px]">
-            <Image src="/images/frnkplus-exclusive-model-campaign.webp" alt={featuredProduct.name} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" style={{ objectPosition: "center 18%" }} />
+            <Image src="/images/frnkplus-exclusive-model-campaign.webp" alt={featuredProduct.name} fill loading="eager" sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" style={{ objectPosition: "center 18%" }} />
             <div className="absolute inset-0 bg-linear-to-t from-black/72 via-transparent to-transparent" />
             <span className="absolute left-4 top-4 bg-white px-3 py-1 text-[10px] uppercase tracking-[0.16em] text-black">Exclusive</span>
           </button>

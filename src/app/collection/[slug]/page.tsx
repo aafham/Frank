@@ -77,7 +77,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <section className="mx-auto grid max-w-[1680px] gap-6 px-0 pb-28 pt-0 sm:gap-8 sm:px-8 sm:pb-12 sm:pt-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-10">
         <div className="grid gap-3 sm:gap-4 md:grid-cols-2">
           <div className="relative min-h-[54svh] overflow-hidden bg-[var(--frnk-coffee)] sm:min-h-[72vh] md:col-span-2">
-            <Image src={primaryImage} alt={`${product.name} view 1`} fill sizes="(min-width: 1024px) 52vw, 100vw" className="object-cover" />
+            <Image src={primaryImage} alt={`${product.name} view 1`} fill priority loading="eager" sizes="(min-width: 1024px) 52vw, 100vw" className="object-cover" />
             <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent sm:hidden" />
           </div>
           {secondaryImages.map((image, index) => (
