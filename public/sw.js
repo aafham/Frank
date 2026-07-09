@@ -1,5 +1,11 @@
 const CACHE_NAME = "frnkplus-static-v1";
-const CORE_ASSETS = ["/icon.svg", "/images/frnk-hero.webp", "/images/frnk-lookbook.webp"];
+const CORE_ASSETS = [
+  "/icon.svg",
+  "/images/frnkplus-brown-puffer.jpg",
+  "/images/frnkplus-black-studio.jpg",
+  "/images/frnkplus-tailored-coat.jpg",
+  "/images/frnkplus-goggles-hoodie.jpg",
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

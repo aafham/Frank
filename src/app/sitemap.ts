@@ -1,13 +1,21 @@
 import type { MetadataRoute } from "next";
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : "https://frnkplus.vercel.app");
+const siteUrl = "https://frnkplus.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ["", "/collection", "/lookbook", "/journal", "/access"];
+  const routes = [
+    "",
+    "/collection",
+    "/lookbook",
+    "/journal",
+    "/story",
+    "/size-guide",
+    "/checkout",
+    "/access",
+    ...["coffee-puffer-jacket", "black-studio-overshirt", "tailored-street-coat", "goggles-hoodie"].map(
+      (slug) => `/collection/${slug}`,
+    ),
+  ];
 
   return routes.map((route) => ({
     url: `${siteUrl}${route}`,

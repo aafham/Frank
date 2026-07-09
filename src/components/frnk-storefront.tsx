@@ -35,77 +35,20 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { journal, lookbookFrames, products, type Product } from "@/lib/frnk-data";
 import { cn } from "@/lib/utils";
 
 type View = "home" | "collection" | "lookbook" | "journal" | "access";
-
-type Product = {
-  id: string;
-  name: string;
-  category: string;
-  price: number;
-  color: string;
-  sizes: string[];
-  image: "/images/frnk-hero.webp" | "/images/frnk-lookbook.webp";
-  note: string;
-};
 
 const navItems = [
   ["Home", "/"],
   ["Collection", "/collection"],
   ["Lookbook", "/lookbook"],
   ["Journal", "/journal"],
+  ["Story", "/story"],
+  ["Size", "/size-guide"],
   ["Access", "/access"],
 ] as const;
-
-const products: Product[] = [
-  {
-    id: "overshirt-01",
-    name: "Washed Cotton Overshirt",
-    category: "Outerwear",
-    price: 188,
-    color: "Dark Olive",
-    sizes: ["S", "M", "L", "XL"],
-    image: "/images/frnk-lookbook.webp",
-    note: "Garment-dyed cotton twill with a relaxed architectural drape.",
-  },
-  {
-    id: "coat-02",
-    name: "Everyday Long Coat",
-    category: "Outerwear",
-    price: 264,
-    color: "Black",
-    sizes: ["S", "M", "L"],
-    image: "/images/frnk-hero.webp",
-    note: "Quiet weather layer with concealed closure and soft structure.",
-  },
-  {
-    id: "knit-03",
-    name: "Heavyweight Cloud Knit",
-    category: "Knitwear",
-    price: 146,
-    color: "Bone White",
-    sizes: ["XS", "S", "M", "L"],
-    image: "/images/frnk-lookbook.webp",
-    note: "Dense cotton knit built for daily wear and low-effort polish.",
-  },
-  {
-    id: "trouser-04",
-    name: "Relaxed Pleat Trouser",
-    category: "Bottoms",
-    price: 172,
-    color: "Coffee Brown",
-    sizes: ["28", "30", "32", "34"],
-    image: "/images/frnk-hero.webp",
-    note: "A wide leg trouser with soft volume and clean front breaks.",
-  },
-];
-
-const journal = [
-  ["Streetwear, edited.", "Oversized shapes, quieter colors, cleaner decisions."],
-  ["Brown as a neutral.", "Deep coffee tones soften black without making the brand warm or casual."],
-  ["Smart clothes, street posture.", "FRNK+ keeps the silhouette relaxed and the finish refined."],
-];
 
 function formatPrice(value: number) {
   return new Intl.NumberFormat("en-US", {
@@ -259,7 +202,7 @@ function HomeView({ reduceMotion }: { reduceMotion: boolean | null }) {
           transition={{ duration: 0.95, delay: 0.1, ease: "easeOut" }}
           className="relative min-h-[55vh] overflow-hidden border border-white/10 bg-[var(--frnk-coffee)] shadow-[0_40px_120px_rgba(0,0,0,0.42)] lg:col-span-5 lg:col-start-7 lg:my-10"
         >
-          <Image src="/images/frnk-hero.webp" alt="FRNK+ model wearing premium minimal streetwear" fill priority loading="eager" sizes="(min-width: 1024px) 42vw, 100vw" className="object-cover object-top" />
+          <Image src="/images/frnkplus-black-studio.jpg" alt="FRNK+ model wearing premium minimal streetwear" fill priority loading="eager" sizes="(min-width: 1024px) 42vw, 100vw" className="object-cover object-top" />
           <div className="absolute inset-0 bg-linear-to-t from-black/72 via-black/10 to-transparent" />
           <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4">
             <div>
@@ -331,6 +274,9 @@ function CollectionView({
                   <Button className="h-10 flex-1 rounded-none bg-[var(--frnk-brown)] text-white hover:bg-white hover:text-black" onClick={() => onAdd(product.id)}>
                     Add
                   </Button>
+                  <Link href={`/collection/${product.slug}`} className="inline-flex h-10 items-center border border-white/15 px-3 text-sm text-white transition hover:bg-white hover:text-black">
+                    Details
+                  </Link>
                   <Button variant="outline" size="icon-lg" aria-label={`Wishlist ${product.name}`} className="rounded-none border-white/15 bg-transparent text-white hover:bg-white hover:text-black" onClick={() => onWishlist(product.id)}>
                     <Heart className={cn(wishlist.includes(product.id) && "fill-white")} />
                   </Button>
@@ -354,20 +300,23 @@ function LookbookView({ onQuickView, reduceMotion }: { onQuickView: (product: Pr
           <p className="mt-6 max-w-sm text-lg leading-8 text-white/58">Smart streetwear shown with dark tones, oversized cuts, and clean confidence.</p>
         </div>
         <div className="grid gap-4 md:grid-cols-2 lg:col-span-8">
-          {[products[1], products[0], products[3], products[2]].map((product, index) => (
+          {lookbookFrames.slice(0, 4).map((frame, index) => (
             <motion.button
-              key={`${product.id}-${index}`}
+              key={frame.title}
               type="button"
               initial={reduceMotion ? false : { opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: index * 0.05, ease: "easeOut" }}
-              onClick={() => onQuickView(product)}
+              onClick={() => onQuickView(products[index % products.length])}
               className={cn("group relative overflow-hidden bg-black text-left", index === 0 && "md:row-span-2", index === 3 && "md:-mt-20")}
             >
               <div className={cn("relative", index === 0 ? "h-[72vh]" : "h-[34vh]")}>
-                <Image src={product.image} alt={product.name} fill sizes="(min-width: 1024px) 34vw, 100vw" className="object-cover transition duration-700 group-hover:scale-[1.035]" />
+                <Image src={frame.image} alt={frame.title} fill sizes="(min-width: 1024px) 34vw, 100vw" className="object-cover transition duration-700 group-hover:scale-[1.035]" />
                 <div className="absolute inset-0 bg-linear-to-t from-black/72 via-black/5 to-transparent" />
-                <p className="absolute bottom-4 left-4 max-w-56 text-2xl font-medium leading-none">{product.name}</p>
+                <div className="absolute bottom-4 left-4 max-w-64">
+                  <p className="text-2xl font-medium leading-none">{frame.title}</p>
+                  <p className="mt-2 text-sm text-white/54">{frame.text}</p>
+                </div>
               </div>
             </motion.button>
           ))}
@@ -408,7 +357,7 @@ function JournalView({ reduceMotion }: { reduceMotion: boolean | null }) {
 function AccessView() {
   return (
     <section className="relative min-h-screen overflow-hidden bg-[var(--frnk-black)] px-5 pb-10 pt-28 text-white sm:px-8 lg:px-10">
-      <Image src="/images/frnk-lookbook.webp" alt="FRNK+ access model wearing dark streetwear" fill sizes="100vw" className="object-cover opacity-28" />
+      <Image src="/images/frnkplus-brown-puffer.jpg" alt="FRNK+ access model wearing dark streetwear" fill sizes="100vw" className="object-cover opacity-28" />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,#050403_0%,rgba(5,4,3,0.78)_48%,rgba(83,54,34,0.46)_100%)]" />
       <div className="relative mx-auto grid min-h-[calc(100svh-9.5rem)] max-w-[1680px] gap-10 lg:grid-cols-12 lg:items-end">
         <div className="lg:col-span-7">
@@ -420,6 +369,11 @@ function AccessView() {
           <div className="flex gap-2">
             <Input name="email" aria-label="Email address" type="email" placeholder="Email address" className="h-12 rounded-none border-white/20 bg-black/40 px-4 text-white placeholder:text-white/42" />
             <Button className="h-12 rounded-none bg-[var(--frnk-brown)] px-6 text-white hover:bg-white hover:text-black">Join</Button>
+          </div>
+          <div className="flex flex-wrap gap-4 text-sm text-white/58">
+            <Link href="/story" className="underline underline-offset-8 hover:text-white">Brand story</Link>
+            <Link href="/size-guide" className="underline underline-offset-8 hover:text-white">Size guide</Link>
+            <Link href="/checkout" className="underline underline-offset-8 hover:text-white">Checkout</Link>
           </div>
         </form>
       </div>
@@ -463,7 +417,7 @@ function MobileMenu({ open, onOpenChange }: { open: boolean; onOpenChange: (open
           aria-modal="true"
           aria-label="Mobile navigation"
         >
-          <Image src="/images/frnk-hero.webp" alt="" fill sizes="100vw" className="object-cover opacity-[0.18]" />
+          <Image src="/images/frnkplus-brown-puffer.jpg" alt="" fill sizes="100vw" className="object-cover opacity-[0.18]" />
           <div className="absolute inset-0 bg-black/70" />
           <div className="relative z-10 flex min-h-full flex-col px-6 py-8">
             <div className="flex items-center justify-between">
@@ -652,7 +606,9 @@ function CartSheet({
             <span>Subtotal</span>
             <span>{formatPrice(total)}</span>
           </div>
-          <Button className="h-12 rounded-none bg-[var(--frnk-brown)] text-white hover:bg-white hover:text-black">Checkout</Button>
+          <Button className="h-12 rounded-none bg-[var(--frnk-brown)] text-white hover:bg-white hover:text-black">
+            <Link href="/checkout">Checkout</Link>
+          </Button>
         </SheetFooter>
       </SheetContent>
     </Sheet>
