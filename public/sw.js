@@ -1,5 +1,5 @@
-const CACHE_NAME = "frank-static-v1";
-const CORE_ASSETS = ["/", "/icon.svg", "/images/frank-hero.webp", "/images/frank-lookbook.webp"];
+const CACHE_NAME = "frnk-static-v1";
+const CORE_ASSETS = ["/", "/icon.svg", "/images/frnk-hero.webp", "/images/frnk-lookbook.webp"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

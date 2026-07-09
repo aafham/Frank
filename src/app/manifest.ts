@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "FRANK | Premium Minimal Streetwear",
-    short_name: "FRANK",
+    name: "FRNK | Premium Contemporary Fashion",
+    short_name: "FRNK",
     description:
       "Timeless everyday clothing with premium quality and minimalist aesthetics.",
     start_url: "/",

@@ -1,6 +1,6 @@
-# FRANK
+# FRNK
 
-Premium minimal streetwear storefront built with Next.js, TypeScript, Tailwind CSS, shadcn/ui, Motion, and Lucide icons.
+Premium contemporary fashion storefront built with Next.js, TypeScript, Tailwind CSS, shadcn/ui, Motion, and Lucide icons.
 
 ## Scripts
 

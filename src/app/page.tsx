@@ -1,5 +1,5 @@
-import { FrankStorefront } from "@/components/frank-storefront";
+import { FrnkStorefront } from "@/components/frnk-storefront";
 
 export default function Home() {
-  return <FrankStorefront />;
+  return <FrnkStorefront />;
 }

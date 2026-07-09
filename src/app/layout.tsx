@@ -18,15 +18,15 @@ const siteUrl = new URL(
   process.env.NEXT_PUBLIC_SITE_URL ??
     (process.env.VERCEL_PROJECT_PRODUCTION_URL
       ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-      : "https://frank.vercel.app"),
+      : "https://frnk.vercel.app"),
 );
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
-  title: "FRANK | Premium Minimal Streetwear",
+  title: "FRNK | Premium Contemporary Fashion",
   description:
-    "FRANK creates timeless everyday clothing with premium quality, minimalist aesthetics, and quiet confidence.",
-  applicationName: "FRANK",
+    "FRNK creates timeless essentials with premium quality, minimalist aesthetics, and quiet confidence.",
+  applicationName: "FRNK",
   manifest: "/manifest.webmanifest",
   icons: {
     icon: [
@@ -41,18 +41,18 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "/",
-    siteName: "FRANK",
-    title: "FRANK | Premium Minimal Streetwear",
+    siteName: "FRNK",
+    title: "FRNK | Premium Contemporary Fashion",
     description:
       "A luxury editorial commerce experience for timeless everyday clothing.",
-    images: ["/images/frank-hero.png"],
+    images: ["/images/frnk-hero.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "FRANK | Premium Minimal Streetwear",
+    title: "FRNK | Premium Contemporary Fashion",
     description:
       "Timeless everyday clothing with premium quality and minimalist aesthetics.",
-    images: ["/images/frank-hero.png"],
+    images: ["/images/frnk-hero.png"],
   },
 };
 

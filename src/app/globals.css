@@ -36,17 +36,17 @@
 }
 
 :root {
-  --frank-black: #0b0b0b;
-  --frank-white: #ffffff;
-  --frank-warm: #f7f7f5;
-  --frank-beige: #efede8;
-  --frank-gray: #d9d9d9;
-  --frank-mid: #a6a6a6;
-  --frank-text: #222222;
-  --frank-border: #e5e5e5;
-  --frank-olive: #7b8365;
-  --frank-brown: #8a7156;
-  --frank-gold: #b08d57;
+  --frnk-black: #0b0b0b;
+  --frnk-white: #ffffff;
+  --frnk-warm: #f7f7f5;
+  --frnk-beige: #efede8;
+  --frnk-gray: #d9d9d9;
+  --frnk-mid: #a6a6a6;
+  --frnk-text: #222222;
+  --frnk-border: #e5e5e5;
+  --frnk-olive: #7b8365;
+  --frnk-brown: #8a7156;
+  --frnk-gold: #b08d57;
   --background: #f7f7f5;
   --foreground: #0b0b0b;
   --card: #ffffff;
@@ -76,7 +76,7 @@
 
   html {
     @apply font-sans;
-    background: var(--frank-warm);
+    background: var(--frnk-warm);
   }
 
   body {
@@ -87,8 +87,8 @@
   }
 
   ::selection {
-    background: var(--frank-black);
-    color: var(--frank-white);
+    background: var(--frnk-black);
+    color: var(--frnk-white);
   }
 
   img {
