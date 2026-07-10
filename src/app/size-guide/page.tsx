@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function SizeGuidePage() {
   return (
-    <main className="min-h-screen bg-[var(--frnk-black)] px-5 py-10 text-white sm:px-8 lg:px-10">
+    <main className="bg-[var(--frnk-black)] px-5 py-8 text-white sm:px-8 sm:py-10 lg:px-10">
       <nav className="mx-auto flex max-w-[1680px] items-center justify-between">
         <Link href="/" className="inline-flex" aria-label="FRNK+ home">
           <BrandLogo />
@@ -20,7 +20,7 @@ export default function SizeGuidePage() {
         </Link>
       </nav>
 
-      <section className="mx-auto mt-20 grid max-w-[1680px] gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+      <section className="mx-auto mt-12 grid max-w-[1680px] gap-10 pb-6 sm:mt-16 lg:mt-20 lg:grid-cols-[0.8fr_1.2fr]">
         <div>
           <p className="text-xs uppercase text-[var(--frnk-tan)]">Size guide</p>
           <h1 className="mt-5 text-6xl font-semibold leading-[0.84] sm:text-8xl">Oversized, but controlled.</h1>

@@ -14,7 +14,7 @@ export default function CheckoutPage() {
   const subtotal = checkoutItems.reduce((sum, product) => sum + product.price, 0);
 
   return (
-    <main className="min-h-screen bg-[var(--frnk-black)] px-5 py-10 text-white sm:px-8 lg:px-10">
+    <main className="bg-[var(--frnk-black)] px-5 py-8 text-white sm:px-8 sm:py-10 lg:px-10">
       <nav className="mx-auto flex max-w-[1680px] items-center justify-between">
         <Link href="/" className="inline-flex" aria-label="FRNK+ home">
           <BrandLogo />
@@ -24,7 +24,7 @@ export default function CheckoutPage() {
         </Link>
       </nav>
 
-      <section className="mx-auto mt-16 grid max-w-[1680px] gap-8 lg:grid-cols-[1fr_0.72fr]">
+      <section className="mx-auto mt-12 grid max-w-[1680px] gap-8 pb-6 sm:mt-16 lg:grid-cols-[1fr_0.72fr]">
         <form className="grid gap-5 border border-white/12 bg-white/[0.03] p-5 lg:p-8">
           <div>
             <p className="text-xs uppercase text-[var(--frnk-tan)]">Secure checkout</p>

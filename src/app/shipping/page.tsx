@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function ShippingPage() {
   return (
-    <main className="min-h-screen bg-[var(--frnk-black)] px-5 py-10 text-white sm:px-8 lg:px-10">
+    <main className="bg-[var(--frnk-black)] px-5 py-8 text-white sm:px-8 sm:py-10 lg:px-10">
       <nav className="mx-auto flex max-w-[1680px] items-center justify-between">
         <Link href="/" className="inline-flex" aria-label="FRNK+ home">
           <BrandLogo />
@@ -19,7 +19,7 @@ export default function ShippingPage() {
         </Link>
       </nav>
 
-      <section className="mx-auto mt-20 max-w-4xl">
+      <section className="mx-auto mt-12 max-w-4xl pb-6 sm:mt-16 lg:mt-20">
         <p className="text-xs uppercase text-[var(--frnk-tan)]">Policy preview</p>
         <h1 className="mt-5 text-6xl font-semibold leading-[0.84] sm:text-8xl">Shipping</h1>
         <div className="mt-10 grid gap-6 text-lg leading-8 text-white/62">

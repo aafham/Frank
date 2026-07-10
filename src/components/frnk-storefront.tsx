@@ -178,7 +178,6 @@ function HomeView({ reduceMotion }: { reduceMotion: boolean | null }) {
   return (
     <section className="relative min-h-[100svh] overflow-hidden bg-[var(--frnk-black)] pt-18">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_24%,rgba(83,54,34,0.52),transparent_34%),linear-gradient(120deg,#050403_0%,#120c08_48%,#050403_100%)]" />
-      <div className="absolute bottom-0 left-0 h-[42vh] w-[42vh] border border-[var(--frnk-brown)]/30" />
 
       <div className="relative min-h-[calc(100svh-4.5rem)] overflow-hidden lg:hidden">
         <Image
@@ -309,35 +308,35 @@ function HomeView({ reduceMotion }: { reduceMotion: boolean | null }) {
           </div>
         </div>
       </section>
-      <section className="border-t border-white/10 bg-[var(--frnk-black)] px-5 py-12 sm:px-8 lg:px-10 lg:py-20">
-        <div className="mx-auto grid max-w-[1680px] gap-5 lg:grid-cols-12 lg:items-stretch">
-          <div className="grid content-between gap-8 border border-white/10 bg-[#090604] p-5 sm:p-8 lg:col-span-5">
+      <section className="border-t border-white/10 bg-[var(--frnk-black)] px-5 py-10 sm:px-8 sm:py-14 lg:px-10 lg:py-16">
+        <div className="relative mx-auto h-[34rem] max-w-[1680px] overflow-hidden border border-white/10 bg-[var(--frnk-coffee)] sm:h-[38rem] lg:h-[34rem]">
+          <Image src="/images/frnkplus-exclusive-model-campaign.webp" alt="FRNK+ official exclusive campaign model" fill sizes="100vw" className="object-cover" style={{ objectPosition: "center 18%" }} />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,4,3,0.94)_0%,rgba(5,4,3,0.62)_46%,rgba(5,4,3,0.12)_100%),linear-gradient(180deg,rgba(5,4,3,0.12)_0%,rgba(5,4,3,0.08)_48%,rgba(5,4,3,0.86)_100%)]" />
+          <div className="relative z-10 flex h-full flex-col justify-between p-5 sm:p-8 lg:p-10">
             <div>
-              <p className="text-xs uppercase tracking-[0.22em] text-[var(--frnk-tan)]">Official exclusive</p>
-              <h2 className="mt-5 text-[clamp(3.2rem,14vw,6rem)] font-semibold leading-[0.86] sm:text-7xl">
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--frnk-tan)]">Official exclusive / Core black</p>
+              <h2 className="mt-5 max-w-xl text-[clamp(3.2rem,14vw,6rem)] font-semibold leading-[0.84] sm:text-7xl lg:text-8xl">
                 Cap first.
                 <br />
                 Noise last.
               </h2>
             </div>
-            <div className="grid gap-5">
-              <p className="text-base leading-7 text-white/60 sm:text-lg sm:leading-8">
-                The FRNK+ exclusive cap leads the black uniform system. Limited, direct, and built for daily movement.
-              </p>
+            <div className="grid gap-5 border-t border-white/20 pt-5 sm:max-w-2xl sm:grid-cols-[1fr_auto] sm:items-end sm:gap-8">
+              <div>
+                <p className="text-2xl font-semibold leading-none sm:text-3xl">Official FRNK+ uniform signal.</p>
+                <p className="mt-3 max-w-lg text-sm leading-6 text-white/64 sm:text-base">
+                  Limited, direct, and built for daily movement.
+                </p>
+              </div>
               <div className="flex flex-wrap gap-3">
                 <Link href="/exclusive" className="inline-flex h-12 items-center justify-center bg-[var(--frnk-brown)] px-6 text-sm font-medium text-white transition hover:bg-white hover:text-black">
                   View Exclusive
                 </Link>
-                <Link href={`/collection/${exclusiveProduct.slug}`} className="inline-flex h-12 items-center justify-center border border-white/15 px-6 text-sm font-medium text-white transition hover:bg-white hover:text-black">
+                <Link href={`/collection/${exclusiveProduct.slug}`} className="inline-flex h-12 items-center justify-center border border-white/20 px-6 text-sm font-medium text-white transition hover:bg-white hover:text-black">
                   Product page
                 </Link>
               </div>
             </div>
-          </div>
-          <div className="relative min-h-[58vh] overflow-hidden bg-[var(--frnk-coffee)] lg:col-span-7">
-            <Image src="/images/frnkplus-exclusive-model-campaign.webp" alt="FRNK+ official exclusive campaign model" fill sizes="(min-width: 1024px) 58vw, 100vw" className="object-cover" style={{ objectPosition: "center 18%" }} />
-            <div className="absolute inset-0 bg-linear-to-t from-black/72 via-black/8 to-transparent" />
-            <p className="absolute bottom-5 left-5 max-w-56 text-3xl font-semibold leading-[0.9]">Official FRNK+ uniform signal.</p>
           </div>
         </div>
       </section>

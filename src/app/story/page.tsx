@@ -20,8 +20,8 @@ export default function StoryPage() {
         </Link>
       </nav>
 
-      <section className="mx-auto grid min-h-[calc(100svh-4.5rem)] max-w-[1680px] gap-8 px-5 pb-10 sm:px-8 lg:grid-cols-12 lg:px-10">
-        <div className="relative min-h-[52vh] overflow-hidden bg-[var(--frnk-coffee)] lg:col-span-5 lg:my-10">
+      <section className="mx-auto grid max-w-[1680px] gap-8 px-5 pb-12 sm:px-8 lg:min-h-[calc(100svh-4.5rem)] lg:grid-cols-12 lg:px-10">
+        <div className="relative aspect-[4/5] overflow-hidden bg-[var(--frnk-coffee)] sm:aspect-[5/4] lg:col-span-5 lg:my-10 lg:aspect-auto lg:min-h-[52vh]">
           <Image src="/images/frnkplus-denim-wall.jpg" alt="FRNK+ streetwear model against a clean wall" fill sizes="(min-width: 1024px) 42vw, 100vw" className="object-cover" />
         </div>
         <div className="grid content-center gap-8 lg:col-span-6 lg:col-start-7">

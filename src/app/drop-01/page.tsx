@@ -24,7 +24,7 @@ export default function DropPage() {
         </Link>
       </nav>
 
-      <section className="mx-auto grid min-h-[calc(100svh-4.5rem)] max-w-[1680px] gap-8 px-5 pb-12 pt-6 sm:px-8 lg:grid-cols-12 lg:px-10">
+      <section className="mx-auto grid max-w-[1680px] gap-8 px-5 pb-12 pt-6 sm:px-8 lg:min-h-[calc(100svh-4.5rem)] lg:grid-cols-12 lg:px-10">
         <div className="grid content-center lg:col-span-5">
           <p className="text-xs uppercase tracking-[0.18em] text-[var(--frnk-tan)]">Drop 01 / Campaign</p>
           <h1 className="mt-6 text-6xl font-semibold leading-[0.8] sm:text-8xl lg:text-[8.6rem]">Dark Brown System</h1>
@@ -41,7 +41,7 @@ export default function DropPage() {
           </div>
         </div>
 
-        <div className="relative min-h-[60vh] overflow-hidden border border-white/10 bg-[var(--frnk-coffee)] lg:col-span-5 lg:col-start-7 lg:my-8">
+        <div className="relative aspect-[4/5] overflow-hidden border border-white/10 bg-[var(--frnk-coffee)] sm:aspect-[5/4] lg:col-span-5 lg:col-start-7 lg:my-8 lg:aspect-auto lg:min-h-[60vh]">
           <Image src="/images/frnkplus-brown-puffer.jpg" alt="FRNK+ Drop 01 brown streetwear campaign" fill priority sizes="(min-width: 1024px) 42vw, 100vw" className="object-cover" />
           <div className="absolute inset-0 bg-linear-to-t from-black/65 via-transparent to-transparent" />
           <p className="absolute bottom-5 left-5 max-w-60 text-2xl font-medium leading-none">Built for quiet confidence and everyday movement.</p>
