@@ -143,21 +143,28 @@ function Header({
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-40 transition-all duration-300",
-        scrolled ? "border-b border-white/10 bg-[var(--frnk-black)]/90 backdrop-blur-xl" : "bg-transparent",
+        scrolled ? "border-b border-white/10 bg-[var(--frnk-black)]/92 backdrop-blur-xl" : "border-b border-white/10 bg-[var(--frnk-black)]",
       )}
     >
-      <nav className="mx-auto grid h-18 max-w-[1680px] grid-cols-[1fr_auto_1fr] items-center px-5 sm:px-8 lg:px-10">
-        <Link href="/" className="inline-flex items-center" aria-label="FRNK+ home">
-          <BrandLogo />
-        </Link>
-        <div className="hidden items-center gap-8 text-[11px] uppercase text-white/58 lg:flex">
-          {desktopNavItems.map(([label, href]) => (
-            <Link key={href} href={href} className="transition hover:text-white">
+      <nav className="relative mx-auto flex h-18 max-w-[1680px] items-center justify-between px-5 sm:px-8 lg:px-10">
+        <div className="hidden items-center gap-7 text-[11px] font-medium uppercase tracking-[0.1em] text-white/66 lg:flex">
+          {desktopNavItems.slice(0, 2).map(([label, href]) => (
+            <Link key={href} href={href} className="transition hover:text-[var(--frnk-blue)]">
               {label}
             </Link>
           ))}
         </div>
-        <div className="flex justify-end gap-1">
+        <Link href="/" className="inline-flex items-center lg:absolute lg:left-1/2 lg:-translate-x-1/2" aria-label="FRNK+ home">
+          <BrandLogo />
+        </Link>
+        <div className="flex items-center justify-end gap-1">
+          <div className="mr-3 hidden items-center gap-7 text-[11px] font-medium uppercase tracking-[0.1em] text-white/66 lg:flex">
+            {desktopNavItems.slice(2).map(([label, href]) => (
+              <Link key={href} href={href} className="transition hover:text-[var(--frnk-blue)]">
+                {label}
+              </Link>
+            ))}
+          </div>
           <IconButton label="Search" onClick={onSearch}>
             <Search />
           </IconButton>
@@ -181,138 +188,89 @@ function Header({
 
 function HomeView({ reduceMotion }: { reduceMotion: boolean | null }) {
   const exclusiveProduct = products[0];
-  const featuredProducts = products.slice(1, 4);
 
   return (
     <section className="bg-[var(--frnk-black)] pt-18">
-      <div className="border-y border-white/10 bg-[var(--frnk-blue)] px-5 py-2 text-center text-[10px] font-medium uppercase tracking-[0.2em] text-[#fffdf9] sm:px-8">
-        Studio 01 / everyday pieces, brighter ideas
-      </div>
-
-      <section className="mx-auto grid max-w-[1680px] overflow-hidden border-b border-white/10 lg:grid-cols-[0.88fr_1.12fr]">
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, x: -24 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="relative flex min-h-[30rem] flex-col justify-between bg-[var(--frnk-lime)] p-5 sm:min-h-[34rem] sm:p-8 lg:min-h-[calc(100svh-7.25rem)] lg:p-10"
-        >
-          <div className="flex items-start justify-between gap-6">
-            <p className="max-w-48 text-[10px] font-medium uppercase leading-5 tracking-[0.18em] text-[#171310]/70">FRNK+ / Collection 01</p>
-            <span className="grid size-11 shrink-0 place-items-center rounded-full border border-[#171310]/25 text-xs font-semibold">01</span>
+      <motion.section
+        initial={reduceMotion ? false : { opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.65, ease: "easeOut" }}
+        className="relative min-h-[calc(100svh-4.5rem)] overflow-hidden bg-[var(--frnk-pink)]"
+      >
+        <Image src="/images/frnkplus-play-hero.png" alt="FRNK+ Studio 01 campaign" fill priority sizes="100vw" className="object-cover" style={{ objectPosition: "62% center" }} />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,253,249,0.08)_0%,rgba(23,19,16,0.48)_100%)]" />
+        <div className="relative mx-auto flex min-h-[calc(100svh-4.5rem)] max-w-[1680px] flex-col justify-between p-5 text-[#fffdf9] sm:p-8 lg:p-10">
+          <div className="flex items-start justify-between gap-5 text-[10px] font-medium uppercase leading-5 tracking-[0.2em]">
+            <p>FRNK+ Studio 01</p>
+            <p className="text-right">Spring / Summer<br />2026</p>
           </div>
-          <div className="relative z-10 max-w-xl">
-            <p className="mb-5 text-xs font-medium uppercase tracking-[0.18em] text-[#171310]/65">Good clothes. Odd energy.</p>
-            <h1 className="text-[clamp(4.9rem,13vw,10.5rem)] font-semibold leading-[0.73] tracking-[0.01em] text-[#171310]">
-              <span className="mb-3 block text-[0.42em] leading-none tracking-[0.06em]">FRNK+</span>
-              PLAY<br />
-              IT<br />
-              COOL.
-            </h1>
-          </div>
-          <div className="relative z-10 grid gap-5 border-t border-[#171310]/25 pt-5 sm:grid-cols-[1fr_auto] sm:items-end">
-            <p className="max-w-sm text-lg leading-7 text-[#171310]/78">Everyday uniform, turned a little sideways.</p>
-            <Link href="/collection" className="inline-flex h-12 items-center justify-center gap-2 bg-[#171310] px-6 text-sm font-medium text-[#fffdf9] transition hover:bg-[var(--frnk-blue)]">
-              Shop Collection <ArrowRight className="size-4" />
-            </Link>
-          </div>
-          <div className="absolute -bottom-14 -left-10 size-44 rounded-full border-[18px] border-[var(--frnk-orange)] sm:size-56" />
-        </motion.div>
-
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, x: 24 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative min-h-[32rem] overflow-hidden bg-[var(--frnk-pink)] sm:min-h-[42rem] lg:min-h-[calc(100svh-7.25rem)]"
-        >
-          <Image src="/images/frnkplus-play-hero.png" alt="FRNK+ Studio 01 model in playful streetwear campaign" fill priority sizes="(min-width: 1024px) 60vw, 100vw" className="object-cover" style={{ objectPosition: "68% center" }} />
-          <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 bg-[linear-gradient(180deg,transparent_0%,rgba(23,19,16,0.44)_100%)] p-5 text-[#fffdf9] sm:p-8">
-            <p className="max-w-48 text-[10px] uppercase leading-5 tracking-[0.18em]">Brown layers / blue room / no rules written down</p>
-            <Link href="/lookbook" className="inline-flex size-12 shrink-0 items-center justify-center rounded-full border border-[#fffdf9]/65 transition hover:bg-[#fffdf9] hover:text-[#171310]" aria-label="Open lookbook">
-              <ArrowRight className="size-5" />
-            </Link>
-          </div>
-        </motion.div>
-      </section>
-
-      <section className="border-b border-white/10 px-5 py-10 sm:px-8 sm:py-14 lg:px-10">
-        <div className="mx-auto grid max-w-[1680px] gap-4 md:grid-cols-3">
-          <div className="flex min-h-56 flex-col justify-between bg-[var(--frnk-blue)] p-5 text-[#fffdf9] sm:p-7">
-            <p className="text-xs uppercase tracking-[0.18em] text-[#fffdf9]/70">A / soft structure</p>
-            <p className="max-w-56 text-4xl font-semibold leading-[0.9]">Brown is a colour now.</p>
-          </div>
-          <div className="flex min-h-56 flex-col justify-between bg-[var(--frnk-pink)] p-5 text-[#171310] sm:p-7">
-            <p className="text-xs uppercase tracking-[0.18em] text-[#171310]/58">B / everyday volume</p>
-            <p className="max-w-56 text-4xl font-semibold leading-[0.9]">Wear the loud part quietly.</p>
-          </div>
-          <div className="flex min-h-56 flex-col justify-between bg-[var(--frnk-orange)] p-5 text-[#171310] sm:p-7">
-            <p className="text-xs uppercase tracking-[0.18em] text-[#171310]/60">C / clean chaos</p>
-            <Link href="/drop-01" className="inline-flex items-center gap-2 text-4xl font-semibold leading-[0.9] underline decoration-2 underline-offset-8">Enter Drop 01 <ArrowRight className="size-7" /></Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="px-5 py-14 sm:px-8 sm:py-20 lg:px-10">
-        <div className="mx-auto grid max-w-[1680px] gap-8 lg:grid-cols-12 lg:items-center">
-          <div className="lg:col-span-5">
-            <p className="text-xs uppercase tracking-[0.18em] text-[var(--frnk-tan)]">The studio edit</p>
-            <h2 className="mt-5 max-w-xl text-[clamp(3.6rem,8vw,7.8rem)] font-semibold leading-[0.8]">Less matching.<br />More movement.</h2>
-            <p className="mt-6 max-w-md text-lg leading-8 text-white/64">Black and brown still anchor the wardrobe. The surrounding world can be more surprising.</p>
-            <Link href="/lookbook" className="mt-8 inline-flex h-12 items-center gap-2 border border-white/20 px-6 text-sm font-medium transition hover:bg-[var(--frnk-blue)] hover:text-[#fffdf9]">View studio lookbook <ArrowRight className="size-4" /></Link>
-          </div>
-          <div className="relative overflow-hidden bg-[var(--frnk-pink)] lg:col-span-7 lg:-rotate-1">
-            <Image src="/images/frnkplus-play-lookbook.png" alt="FRNK+ playful studio lookbook model" width={1024} height={1536} sizes="(min-width: 1024px) 56vw, 100vw" className="h-auto w-full" />
-            <span className="absolute bottom-5 right-5 grid size-22 place-items-center rounded-full bg-[var(--frnk-lime)] text-center text-xs font-semibold uppercase leading-4 text-[#171310] sm:bottom-8 sm:right-8 sm:size-28">Made<br />for<br />outside</span>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-y border-white/10 bg-[var(--frnk-coffee)] px-5 py-12 sm:px-8 sm:py-16 lg:px-10">
-        <div className="mx-auto flex max-w-[1680px] flex-wrap items-end justify-between gap-6">
-          <div>
-            <p className="text-xs uppercase tracking-[0.18em] text-[var(--frnk-tan)]">Wear it your way</p>
-            <h2 className="mt-4 text-[clamp(3.4rem,7vw,6.6rem)] font-semibold leading-[0.82]">The daily lineup.</h2>
-          </div>
-          <Link href="/collection" className="inline-flex h-11 items-center gap-2 border-b border-white/35 text-sm font-medium hover:text-[var(--frnk-blue)]">All pieces <ArrowRight className="size-4" /></Link>
-        </div>
-        <div className="mx-auto mt-10 grid max-w-[1680px] gap-4 md:grid-cols-3">
-          {featuredProducts.map((product, index) => (
-            <article key={product.id} className={cn("group overflow-hidden border border-white/12 bg-[var(--frnk-black)]", index === 1 && "md:translate-y-10")}>
-              <Link href={`/collection/${product.slug}`} className="block w-full text-left">
-                <div className="relative aspect-[0.88] overflow-hidden bg-[var(--frnk-pink)]">
-                  <Image src={product.image} alt={product.name} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover transition duration-700 group-hover:scale-[1.04]" />
-                  <span className="absolute left-4 top-4 bg-[var(--frnk-lime)] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#171310]">0{index + 2}</span>
-                </div>
-                <div className="flex items-start justify-between gap-4 p-4 sm:p-5">
-                  <div>
-                    <p className="font-semibold">{product.name}</p>
-                    <p className="mt-1 text-sm text-white/52">{product.color}</p>
-                  </div>
-                  <p className="text-sm font-medium">{formatPrice(product.price)}</p>
-                </div>
-              </Link>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="px-5 py-12 sm:px-8 sm:py-16 lg:px-10">
-        <div className="mx-auto grid max-w-[1680px] overflow-hidden border border-white/10 md:grid-cols-[1.1fr_0.9fr]">
-          <div className="relative min-h-[30rem] bg-[var(--frnk-orange)]">
-            <Image src="/images/frnkplus-play-duo.png" alt="FRNK+ Studio 01 duo campaign" fill sizes="(min-width: 768px) 58vw, 100vw" className="object-cover" />
-          </div>
-          <div className="flex flex-col justify-between bg-[var(--frnk-blue)] p-6 text-[#fffdf9] sm:p-10">
+          <div className="flex flex-wrap items-end justify-between gap-6 border-t border-[#fffdf9]/40 pt-5 sm:pt-6">
             <div>
-              <p className="text-xs uppercase tracking-[0.2em] text-[#fffdf9]/65">Official exclusive</p>
-              <h2 className="mt-6 text-[clamp(3.4rem,7vw,6.5rem)] font-semibold leading-[0.8]">The cap<br />has friends.</h2>
+              <h1 className="text-[clamp(3.6rem,9vw,8.8rem)] font-semibold leading-[0.78] tracking-[0.01em]">BRIGHT<br />IDEAS.</h1>
+              <p className="mt-4 max-w-sm text-sm leading-6 text-[#fffdf9]/78">New uniform, same intention. Available now.</p>
             </div>
-            <div className="mt-10 border-t border-[#fffdf9]/30 pt-5">
-              <p className="max-w-sm text-lg leading-7 text-[#fffdf9]/78">The original FRNK+ cap stays exclusive. The rest of the uniform is open to interpretation.</p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Link href="/exclusive" className="inline-flex h-12 items-center justify-center bg-[#fffdf9] px-6 text-sm font-medium text-[#171310] transition hover:bg-[var(--frnk-lime)]">View Exclusive</Link>
-                <Link href={`/collection/${exclusiveProduct.slug}`} className="inline-flex h-12 items-center justify-center border border-[#fffdf9]/45 px-6 text-sm font-medium text-[#fffdf9] transition hover:bg-[#fffdf9] hover:text-[#171310]">Product details</Link>
-              </div>
-            </div>
+            <Link href="/collection" className="inline-flex h-12 items-center gap-2 border border-[#fffdf9]/60 px-6 text-sm font-medium transition hover:bg-[#fffdf9] hover:text-[#171310]">Shop Studio 01 <ArrowRight className="size-4" /></Link>
           </div>
+        </div>
+      </motion.section>
+
+      <section className="mx-auto max-w-[1680px] px-5 py-10 sm:px-8 lg:px-10">
+        <div className="flex items-center justify-between gap-4 border-b border-white/15 pb-4 text-[10px] font-medium uppercase tracking-[0.18em] text-white/54">
+          <p>Current releases</p>
+          <p>03 / 03</p>
+        </div>
+      </section>
+
+      <section className="mx-auto grid max-w-[1680px] gap-0 overflow-hidden border-y border-white/10 md:grid-cols-2">
+        <Link href="/lookbook" className="group relative min-h-[38rem] overflow-hidden bg-[var(--frnk-lime)] sm:min-h-[46rem]">
+          <Image src="/images/frnkplus-play-lookbook.png" alt="FRNK+ lookbook campaign" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover transition duration-700 group-hover:scale-[1.025]" />
+          <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,transparent_0%,rgba(23,19,16,0.54)_100%)] p-5 text-[#fffdf9] sm:p-8">
+            <p className="text-[10px] uppercase tracking-[0.2em] text-[#fffdf9]/68">02 / Lookbook</p>
+            <h2 className="mt-3 text-[clamp(2.8rem,6vw,5.5rem)] font-semibold leading-[0.85]">Lime<br />leaning.</h2>
+            <p className="mt-4 text-sm text-[#fffdf9]/76">View Studio 01</p>
+          </div>
+        </Link>
+        <Link href="/drop-01" className="group relative min-h-[38rem] overflow-hidden bg-[var(--frnk-orange)] sm:min-h-[46rem]">
+          <Image src="/images/frnkplus-play-duo.png" alt="FRNK+ duo campaign" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover transition duration-700 group-hover:scale-[1.025]" />
+          <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,transparent_0%,rgba(23,19,16,0.54)_100%)] p-5 text-[#fffdf9] sm:p-8">
+            <p className="text-[10px] uppercase tracking-[0.2em] text-[#fffdf9]/68">03 / Drop 01</p>
+            <h2 className="mt-3 text-[clamp(2.8rem,6vw,5.5rem)] font-semibold leading-[0.85]">Two ways<br />in.</h2>
+            <p className="mt-4 text-sm text-[#fffdf9]/76">Explore the drop</p>
+          </div>
+        </Link>
+      </section>
+
+      <section className="mx-auto grid max-w-[1680px] border-b border-white/10 md:grid-cols-[0.9fr_1.1fr]">
+        <div className="flex min-h-[28rem] flex-col justify-between bg-[var(--frnk-blue)] p-6 text-[#fffdf9] sm:p-10">
+          <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#fffdf9]/68">Official exclusive</p>
+          <div>
+            <h2 className="text-[clamp(3.2rem,7vw,6.8rem)] font-semibold leading-[0.8]">The cap,<br />reframed.</h2>
+            <p className="mt-5 max-w-sm text-base leading-7 text-[#fffdf9]/78">One official piece. A hundred ways to make it yours.</p>
+            <Link href={`/collection/${exclusiveProduct.slug}`} className="mt-7 inline-flex h-11 items-center gap-2 border-b border-[#fffdf9]/55 text-sm font-medium">Explore exclusive <ArrowRight className="size-4" /></Link>
+          </div>
+        </div>
+        <Link href="/exclusive" className="group relative min-h-[28rem] overflow-hidden bg-[var(--frnk-coffee)]">
+          <Image src="/images/frnkplus-exclusive-model-campaign.webp" alt="FRNK+ exclusive cap campaign" fill sizes="(min-width: 768px) 58vw, 100vw" className="object-cover transition duration-700 group-hover:scale-[1.025]" style={{ objectPosition: "center 18%" }} />
+          <span className="absolute bottom-5 right-5 grid size-14 place-items-center rounded-full bg-[var(--frnk-lime)] text-[10px] font-semibold uppercase tracking-[0.12em] text-[#171310] sm:bottom-8 sm:right-8 sm:size-18">Open</span>
+        </Link>
+      </section>
+
+      <section className="mx-auto grid max-w-[1680px] gap-8 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-12 lg:px-10">
+        <div className="lg:col-span-4">
+          <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--frnk-tan)]">FRNK+ Journal</p>
+          <h2 className="mt-4 text-[clamp(3rem,6vw,5.5rem)] font-semibold leading-[0.84]">Things we<br />keep close.</h2>
+        </div>
+        <div className="grid gap-px border-y border-white/12 bg-white/12 lg:col-span-7 lg:col-start-6">
+          {journal.slice(0, 3).map(([title, text], index) => (
+            <Link key={title} href="/journal" className="group grid gap-4 bg-[var(--frnk-black)] p-5 transition hover:bg-[var(--frnk-pink)] sm:grid-cols-[auto_1fr_auto] sm:items-center sm:p-6">
+              <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-white/48">0{index + 1}</span>
+              <div>
+                <h3 className="text-2xl font-semibold leading-none sm:text-3xl">{title}</h3>
+                <p className="mt-2 text-sm leading-6 text-white/58">{text}</p>
+              </div>
+              <ArrowRight className="size-5 transition group-hover:translate-x-1" />
+            </Link>
+          ))}
         </div>
       </section>
 
