@@ -48,7 +48,7 @@ export default function DropPage() {
         </div>
       </section>
 
-      <section className="border-y border-white/10 bg-[#0b0704] px-5 py-16 sm:px-8 lg:px-10">
+      <section className="border-y border-white/10 bg-[#f2eee9] px-5 py-16 sm:px-8 lg:px-10">
         <div className="mx-auto grid max-w-[1680px] gap-8 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <p className="text-xs uppercase text-[var(--frnk-tan)]">System notes</p>

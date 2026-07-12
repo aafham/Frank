@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title">
   <title>FRNK+ official logo</title>
-  <g fill="none" stroke="#ffffff" stroke-width="14" stroke-linejoin="miter" stroke-linecap="square">
+  <g fill="none" stroke="#171310" stroke-width="14" stroke-linejoin="miter" stroke-linecap="square">
     <path d="M47 38h140v140H47z" />
     <path d="M47 178h90" />
     <path d="M187 132v46" />
   </g>
-  <g fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-weight="900">
+  <g fill="#171310" font-family="Arial, Helvetica, sans-serif" font-weight="900">
     <text x="72" y="105" font-size="64" letter-spacing="-3">FR</text>
     <text x="72" y="164" font-size="64" letter-spacing="-3">NK</text>
   </g>

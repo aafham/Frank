@@ -5,6 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --color-white: #171310;
+  --color-black: #fffdf9;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: "Geist", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
@@ -36,37 +38,37 @@
 }
 
 :root {
-  --frnk-black: #050403;
-  --frnk-white: #ffffff;
-  --frnk-warm: #f4efe8;
-  --frnk-beige: #d6c3ae;
-  --frnk-gray: #6f6860;
-  --frnk-mid: #a08b75;
-  --frnk-text: #f4efe8;
-  --frnk-border: #2a211a;
-  --frnk-olive: #4e4938;
-  --frnk-brown: #5a3824;
-  --frnk-coffee: #17100c;
-  --frnk-tan: #b99a7a;
-  --frnk-gold: #a8794f;
-  --background: #050403;
-  --foreground: #ffffff;
-  --card: #17100c;
-  --card-foreground: #ffffff;
+  --frnk-black: #f8f6f2;
+  --frnk-white: #171310;
+  --frnk-warm: #fffdf9;
+  --frnk-beige: #dfd5ca;
+  --frnk-gray: #716960;
+  --frnk-mid: #927b68;
+  --frnk-text: #171310;
+  --frnk-border: #d8cfc5;
+  --frnk-olive: #77715e;
+  --frnk-brown: #b98766;
+  --frnk-coffee: #eee8e1;
+  --frnk-tan: #765842;
+  --frnk-gold: #9a6b47;
+  --background: #f8f6f2;
+  --foreground: #171310;
+  --card: #eee8e1;
+  --card-foreground: #171310;
   --popover: #ffffff;
-  --popover-foreground: #0b0b0b;
-  --primary: #5a3824;
-  --primary-foreground: #ffffff;
-  --secondary: #17100c;
-  --secondary-foreground: #ffffff;
-  --muted: #17100c;
-  --muted-foreground: #b99a7a;
-  --accent: #2a211a;
-  --accent-foreground: #ffffff;
+  --popover-foreground: #171310;
+  --primary: #b98766;
+  --primary-foreground: #171310;
+  --secondary: #eee8e1;
+  --secondary-foreground: #171310;
+  --muted: #eee8e1;
+  --muted-foreground: #765842;
+  --accent: #dfd5ca;
+  --accent-foreground: #171310;
   --destructive: #d32f2f;
-  --border: #2a211a;
-  --input: #2a211a;
-  --ring: #b99a7a;
+  --border: #d8cfc5;
+  --input: #d8cfc5;
+  --ring: #765842;
   --radius: 0.75rem;
 }
 

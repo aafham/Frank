@@ -38,7 +38,7 @@ export function DropCountdown() {
   }, []);
 
   return (
-    <section className="border-y border-white/10 bg-[#090604] px-5 py-8 text-white sm:px-8 sm:py-12 lg:px-10">
+    <section className="border-y border-white/10 bg-[#f0ebe5] px-5 py-8 text-white sm:px-8 sm:py-12 lg:px-10">
       <div className="mx-auto grid max-w-[1680px] gap-6 lg:grid-cols-12 lg:items-end">
         <div className="lg:col-span-4">
           <p className="text-xs uppercase tracking-[0.18em] text-[var(--frnk-tan)]">Drop opens soon</p>

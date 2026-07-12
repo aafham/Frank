@@ -177,7 +177,7 @@ function HomeView({ reduceMotion }: { reduceMotion: boolean | null }) {
 
   return (
     <section className="relative min-h-[100svh] overflow-hidden bg-[var(--frnk-black)] pt-18">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_24%,rgba(83,54,34,0.52),transparent_34%),linear-gradient(120deg,#050403_0%,#120c08_48%,#050403_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_24%,rgba(185,135,102,0.3),transparent_34%),linear-gradient(120deg,#fffdf9_0%,#eee8e1_48%,#f8f6f2_100%)]" />
 
       <div className="relative min-h-[calc(100svh-4.5rem)] overflow-hidden lg:hidden">
         <Image
@@ -189,8 +189,8 @@ function HomeView({ reduceMotion }: { reduceMotion: boolean | null }) {
           sizes="100vw"
           className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,4,3,0.18)_0%,rgba(5,4,3,0.06)_34%,rgba(5,4,3,0.78)_78%,#050403_100%)]" />
-        <div className="absolute inset-x-0 top-0 h-52 bg-[linear-gradient(180deg,#050403_0%,rgba(5,4,3,0.2)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,253,249,0.28)_0%,rgba(255,253,249,0.04)_34%,rgba(248,246,242,0.78)_78%,#f8f6f2_100%)]" />
+        <div className="absolute inset-x-0 top-0 h-52 bg-[linear-gradient(180deg,#f8f6f2_0%,rgba(248,246,242,0.16)_100%)]" />
 
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 20 }}
@@ -241,7 +241,7 @@ function HomeView({ reduceMotion }: { reduceMotion: boolean | null }) {
           className="object-cover"
           style={{ objectPosition: "center 34%" }}
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,4,3,0.82)_0%,rgba(5,4,3,0.28)_42%,rgba(5,4,3,0.76)_100%),linear-gradient(180deg,rgba(5,4,3,0.42)_0%,rgba(5,4,3,0.02)_44%,#050403_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(248,246,242,0.88)_0%,rgba(248,246,242,0.2)_42%,rgba(248,246,242,0.72)_100%),linear-gradient(180deg,rgba(248,246,242,0.36)_0%,rgba(248,246,242,0.02)_44%,#f8f6f2_100%)]" />
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
@@ -280,7 +280,7 @@ function HomeView({ reduceMotion }: { reduceMotion: boolean | null }) {
         </motion.div>
       </div>
 
-      <section className="relative border-t border-white/10 bg-[#0b0704] px-5 py-12 sm:px-8 sm:py-16 lg:px-10 lg:py-24">
+      <section className="relative border-t border-white/10 bg-[#f2eee9] px-5 py-12 sm:px-8 sm:py-16 lg:px-10 lg:py-24">
         <div className="mx-auto grid max-w-[1680px] gap-7 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-4 lg:pt-12">
             <p className="text-xs uppercase tracking-[0.18em] text-[var(--frnk-tan)]">Drop 01 / Dark Brown System</p>
@@ -311,7 +311,7 @@ function HomeView({ reduceMotion }: { reduceMotion: boolean | null }) {
       <section className="border-t border-white/10 bg-[var(--frnk-black)] px-5 py-10 sm:px-8 sm:py-14 lg:px-10 lg:py-16">
         <div className="relative mx-auto h-[34rem] max-w-[1680px] overflow-hidden border border-white/10 bg-[var(--frnk-coffee)] sm:h-[38rem] lg:h-[34rem]">
           <Image src="/images/frnkplus-exclusive-model-campaign.webp" alt="FRNK+ official exclusive campaign model" fill sizes="100vw" className="object-cover" style={{ objectPosition: "center 18%" }} />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,4,3,0.94)_0%,rgba(5,4,3,0.62)_46%,rgba(5,4,3,0.12)_100%),linear-gradient(180deg,rgba(5,4,3,0.12)_0%,rgba(5,4,3,0.08)_48%,rgba(5,4,3,0.86)_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(248,246,242,0.94)_0%,rgba(248,246,242,0.62)_46%,rgba(248,246,242,0.08)_100%),linear-gradient(180deg,rgba(248,246,242,0.08)_0%,rgba(248,246,242,0.04)_48%,rgba(248,246,242,0.86)_100%)]" />
           <div className="relative z-10 flex h-full flex-col justify-between p-5 sm:p-8 lg:p-10">
             <div>
               <p className="text-xs uppercase tracking-[0.22em] text-[var(--frnk-tan)]">Official exclusive / Core black</p>
@@ -379,7 +379,7 @@ function CollectionView({
           initial={reduceMotion ? false : { opacity: 0, y: 26 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, ease: "easeOut" }}
-          className="mt-10 grid overflow-hidden border border-white/10 bg-[#090604] md:grid-cols-[1.05fr_0.95fr] lg:mt-12"
+          className="mt-10 grid overflow-hidden border border-white/10 bg-[#f0ebe5] md:grid-cols-[1.05fr_0.95fr] lg:mt-12"
         >
           <button type="button" onClick={() => onQuickView(featuredProduct)} className="relative block min-h-[58vh] overflow-hidden text-left md:min-h-[520px]">
             <Image src="/images/frnkplus-exclusive-model-campaign.webp" alt={featuredProduct.name} fill loading="eager" sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" style={{ objectPosition: "center 18%" }} />
@@ -542,7 +542,7 @@ function AccessView() {
   return (
     <section className="relative min-h-screen overflow-hidden bg-[var(--frnk-black)] px-5 pb-10 pt-28 text-white sm:px-8 lg:px-10">
       <Image src="/images/frnkplus-brown-puffer.jpg" alt="FRNK+ access model wearing dark streetwear" fill sizes="100vw" className="object-cover opacity-28" />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,#050403_0%,rgba(5,4,3,0.78)_48%,rgba(83,54,34,0.46)_100%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,#f8f6f2_0%,rgba(248,246,242,0.82)_48%,rgba(185,135,102,0.42)_100%)]" />
       <div className="relative mx-auto grid min-h-[calc(100svh-9.5rem)] max-w-[1680px] gap-10 lg:grid-cols-12 lg:items-end">
         <div className="lg:col-span-7">
           <p className="text-xs uppercase text-[var(--frnk-tan)]">Private access</p>
@@ -603,7 +603,7 @@ function MobileMenu({ open, onOpenChange }: { open: boolean; onOpenChange: (open
           aria-label="Mobile navigation"
         >
           <Image src="/images/frnkplus-exclusive-streetwear-cap.webp" alt="" fill sizes="100vw" className="object-cover object-center opacity-[0.18]" />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,4,3,0.84)_0%,rgba(5,4,3,0.94)_58%,#050403_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(248,246,242,0.86)_0%,rgba(248,246,242,0.96)_58%,#f8f6f2_100%)]" />
           <div className="absolute left-5 top-28 text-[20vw] font-semibold leading-[0.72] tracking-[0.08em] text-white/[0.05]">
             FR<br />NK
           </div>
