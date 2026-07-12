@@ -93,9 +93,9 @@ export const products: Product[] = [
 ];
 
 export const lookbookFrames = [
-  { image: "/images/frnkplus-brown-puffer.jpg", title: "Coffee volume", text: "Brown, black, concrete, breath." },
-  { image: "/images/frnkplus-black-studio.jpg", title: "Studio black", text: "Clean shirt shape with street posture." },
-  { image: "/images/frnkplus-tailored-coat.jpg", title: "Tailored street", text: "Smart enough for night, relaxed enough for daily wear." },
+  { image: "/images/frnkplus-play-hero.png", title: "Blue room", text: "A uniform can still have a pulse." },
+  { image: "/images/frnkplus-play-lookbook.png", title: "Lime leaning", text: "Street layers under gallery light." },
+  { image: "/images/frnkplus-play-duo.png", title: "Two ways in", text: "Black, brown, then something unexpected." },
   { image: "/images/frnkplus-goggles-hoodie.jpg", title: "Quiet technical", text: "A hoodie with sharper energy." },
   { image: "/images/frnkplus-urban-walk.jpg", title: "Urban line", text: "Movement, concrete, minimal contrast." },
   { image: "/images/frnkplus-cap-jacket.jpg", title: "Cap jacket", text: "No noise. Just proportion." },

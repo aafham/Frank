@@ -13,7 +13,13 @@ const footerLinks = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-white/10 bg-[var(--frnk-black)] px-5 py-12 text-white sm:px-8 lg:px-10">
+    <footer className="relative overflow-hidden border-t border-white/10 bg-[var(--frnk-black)] px-5 py-12 text-white sm:px-8 lg:px-10">
+      <div className="absolute inset-x-0 top-0 flex h-2">
+        <span className="flex-1 bg-[var(--frnk-blue)]" />
+        <span className="flex-1 bg-[var(--frnk-lime)]" />
+        <span className="flex-1 bg-[var(--frnk-orange)]" />
+        <span className="flex-1 bg-[var(--frnk-pink)]" />
+      </div>
       <div className="mx-auto grid max-w-[1680px] gap-10 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <Link href="/" className="inline-flex" aria-label="FRNK+ home">
