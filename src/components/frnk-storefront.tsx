@@ -292,87 +292,57 @@ function CollectionView({
   onQuickView: (product: Product) => void;
   reduceMotion: boolean | null;
 }) {
-  const [featuredProduct, ...standardProducts] = products;
+  const launchColors = [
+    "bg-[var(--frnk-lime)]",
+    "bg-[var(--frnk-pink)]",
+    "bg-[var(--frnk-blue)]",
+    "bg-[var(--frnk-orange)]",
+    "bg-[var(--frnk-coffee)]",
+  ];
 
   return (
-    <section className="min-h-screen bg-[var(--frnk-black)] px-5 pb-12 pt-28 sm:px-8 lg:px-10">
-      <div className="mx-auto max-w-[1680px]">
-        <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
-          <div className="lg:col-span-5">
-            <p className="text-xs uppercase text-[var(--frnk-tan)]">Collection</p>
-            <h1 className="mt-5 text-5xl font-semibold leading-[0.88] sm:text-7xl">Streetwear, edited down.</h1>
+    <section className="min-h-screen bg-[var(--frnk-black)] pb-16 pt-18 text-white">
+      <div className="border-b border-white/10 px-5 py-5 sm:px-8 lg:px-10">
+        <div className="mx-auto flex max-w-[1680px] flex-wrap items-end justify-between gap-5">
+          <div>
+            <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--frnk-tan)]">FRNK+ Shop</p>
+            <h1 className="mt-2 text-[clamp(3.4rem,7vw,6.8rem)] font-semibold leading-[0.82]">Studio 01</h1>
           </div>
-          <p className="max-w-lg text-lg leading-8 text-white/58 lg:col-span-4 lg:col-start-9">
-            Dark essentials, relaxed proportions, and smart finishing. Minimal, but not plain.
-          </p>
+          <p className="max-w-sm text-sm leading-6 text-white/58">Five everyday pieces. One changing studio.</p>
         </div>
+      </div>
 
-        <motion.article
-          initial={reduceMotion ? false : { opacity: 0, y: 26 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, ease: "easeOut" }}
-          className="mt-10 grid overflow-hidden border border-white/10 bg-[#f0ebe5] md:grid-cols-[1.05fr_0.95fr] lg:mt-12"
-        >
-          <button type="button" onClick={() => onQuickView(featuredProduct)} className="relative block min-h-[58vh] overflow-hidden text-left md:min-h-[520px]">
-            <Image src="/images/frnkplus-exclusive-model-campaign.webp" alt={featuredProduct.name} fill loading="eager" sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" style={{ objectPosition: "center 18%" }} />
-            <div className="absolute inset-0 bg-linear-to-t from-black/72 via-transparent to-transparent" />
-            <span className="absolute left-4 top-4 bg-white px-3 py-1 text-[10px] uppercase tracking-[0.16em] text-black">Exclusive</span>
-          </button>
-          <div className="grid content-between gap-8 p-5 sm:p-8">
-            <div>
-              <p className="text-xs uppercase tracking-[0.22em] text-[var(--frnk-tan)]">Official FRNK+ / Drop accessory 001</p>
-              <h2 className="mt-5 text-[clamp(3rem,12vw,5.5rem)] font-semibold leading-[0.86]">{featuredProduct.name}</h2>
-              <p className="mt-5 max-w-xl text-base leading-7 text-white/60 sm:text-lg sm:leading-8">{featuredProduct.note}</p>
-            </div>
-            <div className="grid gap-4">
-              <div className="flex items-center justify-between border-y border-white/10 py-4">
-                <span className="text-sm text-white/54">{featuredProduct.color} / {featuredProduct.sizes.join(" ")}</span>
-                <span>{formatPrice(featuredProduct.price)}</span>
-              </div>
-              <div className="grid grid-cols-[1fr_auto] gap-2">
-                <Button className="h-11 rounded-none bg-[var(--frnk-brown)] text-white hover:bg-white hover:text-black" onClick={() => onAdd(featuredProduct.id)}>
-                  Add exclusive
-                </Button>
-                <Link href={`/collection/${featuredProduct.slug}`} className="inline-flex h-11 items-center border border-white/15 px-4 text-sm text-white transition hover:bg-white hover:text-black">
-                  Details
-                </Link>
-              </div>
-            </div>
-          </div>
-        </motion.article>
-
-        <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-          {standardProducts.map((product, index) => (
+      <div className="mx-auto max-w-[1680px] px-5 py-8 sm:px-8 lg:px-10">
+        <div className="mb-6 flex items-center justify-between border-b border-white/12 pb-3 text-[10px] font-medium uppercase tracking-[0.18em] text-white/48">
+          <p>All pieces</p>
+          <p>{products.length} available</p>
+        </div>
+        <div className="grid gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          {products.map((product, index) => (
             <motion.article
               key={product.id}
-              initial={reduceMotion ? false : { opacity: 0, y: 26 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: index * 0.06, ease: "easeOut" }}
-              className="group border border-white/10 bg-[var(--frnk-coffee)]"
+              transition={{ duration: 0.5, delay: index * 0.05, ease: "easeOut" }}
+              className="group"
             >
-              <button type="button" onClick={() => onQuickView(product)} className="relative block aspect-[0.78] w-full overflow-hidden text-left">
-                <Image src={product.image} alt={product.name} fill sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw" className="object-cover transition duration-700 group-hover:scale-[1.04]" />
-                <span className="absolute left-4 top-4 bg-black/72 px-3 py-1 text-[11px] uppercase text-white backdrop-blur">{product.category}</span>
-                <span className="absolute right-4 top-4 bg-white/90 px-3 py-1 text-[10px] uppercase tracking-[0.16em] text-black">
-                  {Object.values(product.stock).reduce((sum, count) => sum + count, 0)} left
-                </span>
+              <button type="button" onClick={() => onQuickView(product)} className={cn("relative block aspect-[0.82] w-full overflow-hidden text-left", launchColors[index])}>
+                <Image src={product.image} alt={product.name} fill loading={index < 2 ? "eager" : "lazy"} sizes="(min-width: 1280px) 20vw, (min-width: 640px) 50vw, 100vw" className="object-cover transition duration-700 group-hover:scale-[1.035]" />
+                <span className="absolute left-3 top-3 bg-[#fffdf9] px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.16em] text-[#171310]">0{index + 1}</span>
+                <span className="absolute bottom-3 right-3 grid size-9 place-items-center rounded-full bg-[#171310] text-[#fffdf9] opacity-0 transition group-hover:opacity-100" aria-hidden="true"><ArrowRight className="size-4" /></span>
               </button>
-              <div className="grid gap-4 p-4">
-                <div className="flex items-start justify-between gap-4">
+              <div className="grid gap-3 pt-4">
+                <div className="flex items-start justify-between gap-3">
                   <div>
-                    <h2 className="font-medium">{product.name}</h2>
-                    <p className="mt-1 text-sm text-white/48">{product.color} / {product.sizes.join(" ")}</p>
+                    <h2 className="font-semibold leading-tight">{product.name}</h2>
+                    <p className="mt-1 text-xs text-white/48">{product.color}</p>
                   </div>
-                  <p className="text-sm">{formatPrice(product.price)}</p>
+                  <p className="shrink-0 text-sm font-medium">{formatPrice(product.price)}</p>
                 </div>
-                <div className="flex gap-2">
-                  <Button className="h-10 flex-1 rounded-none bg-[var(--frnk-brown)] text-white hover:bg-white hover:text-black" onClick={() => onAdd(product.id)}>
-                    Add
-                  </Button>
-                  <Link href={`/collection/${product.slug}`} className="inline-flex h-10 items-center border border-white/15 px-3 text-sm text-white transition hover:bg-white hover:text-black">
-                    Details
-                  </Link>
-                  <Button variant="outline" size="icon-lg" aria-label={`Wishlist ${product.name}`} className="rounded-none border-white/15 bg-transparent text-white hover:bg-white hover:text-black" onClick={() => onWishlist(product.id)}>
+                <div className="flex items-center gap-2">
+                  <Button className="h-9 flex-1 rounded-none bg-[var(--frnk-blue)] text-xs text-[#fffdf9] hover:bg-[var(--frnk-orange)]" onClick={() => onAdd(product.id)}>Add</Button>
+                  <Link href={`/collection/${product.slug}`} className="inline-flex h-9 items-center justify-center border border-white/18 px-3 text-xs font-medium transition hover:bg-white hover:text-black">Info</Link>
+                  <Button variant="outline" size="icon-sm" aria-label={`Wishlist ${product.name}`} className="rounded-none border-white/18 bg-transparent text-white hover:bg-white hover:text-black" onClick={() => onWishlist(product.id)}>
                     <Heart className={cn(wishlist.includes(product.id) && "fill-white")} />
                   </Button>
                 </div>
@@ -386,57 +356,45 @@ function CollectionView({
 }
 
 function LookbookView({ onQuickView, reduceMotion }: { onQuickView: (product: Product) => void; reduceMotion: boolean | null }) {
+  const frameColors = ["bg-[var(--frnk-blue)]", "bg-[var(--frnk-orange)]", "bg-[var(--frnk-pink)]", "bg-[var(--frnk-lime)]", "bg-[var(--frnk-coffee)]", "bg-[var(--frnk-blue)]"];
+
   return (
-    <section className="min-h-screen overflow-hidden bg-[var(--frnk-coffee)] px-5 pb-14 pt-28 text-white sm:px-8 lg:px-10">
-      <div className="mx-auto max-w-[1680px]">
-        <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
-          <div className="lg:col-span-6">
-            <p className="text-xs uppercase text-[var(--frnk-tan)]">Lookbook / Drop 01</p>
-            <h1 className="mt-5 text-6xl font-semibold leading-[0.82] sm:text-8xl">Model, mood, movement.</h1>
+    <section className="min-h-screen bg-[var(--frnk-black)] pb-16 pt-18 text-white">
+      <div className="mx-auto max-w-[1680px] border-b border-white/10 px-5 py-5 sm:px-8 lg:px-10">
+        <div className="flex flex-wrap items-end justify-between gap-5">
+          <div>
+            <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--frnk-tan)]">FRNK+ Book 01</p>
+            <h1 className="mt-2 text-[clamp(3.4rem,7vw,6.8rem)] font-semibold leading-[0.82]">Moving through.</h1>
           </div>
-          <p className="max-w-lg text-lg leading-8 text-white/58 lg:col-span-4 lg:col-start-9">
-            A campaign layout for black layers, coffee tones, concrete light, and controlled street posture.
-          </p>
+          <p className="max-w-sm text-sm leading-6 text-white/58">Six studio scenes. Tap any frame to view the piece.</p>
         </div>
+      </div>
 
-        <div className="mt-12 grid gap-4 md:grid-cols-6 lg:grid-cols-12">
-          {lookbookFrames.map((frame, index) => (
-            <motion.button
-              key={frame.title}
-              type="button"
-              initial={reduceMotion ? false : { opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: index * 0.05, ease: "easeOut" }}
-              onClick={() => onQuickView(products[index % products.length])}
-              className={cn(
-                "group relative overflow-hidden bg-black text-left",
-                index === 0 && "md:col-span-4 lg:col-span-5 lg:row-span-2",
-                index === 1 && "md:col-span-2 lg:col-span-3 lg:mt-24",
-                index === 2 && "md:col-span-3 lg:col-span-4",
-                index === 3 && "md:col-span-3 lg:col-span-3 lg:-mt-16",
-                index === 4 && "md:col-span-2 lg:col-span-4",
-                index === 5 && "md:col-span-4 lg:col-span-5 lg:-mt-20",
-              )}
-            >
-              <div className={cn("relative", index === 0 ? "h-[72vh]" : index === 5 ? "h-[56vh]" : "h-[40vh]")}>
-                <Image src={frame.image} alt={frame.title} fill sizes="(min-width: 1024px) 34vw, 100vw" className="object-cover transition duration-700 group-hover:scale-[1.035]" />
-                <div className="absolute inset-0 bg-linear-to-t from-black/72 via-black/5 to-transparent" />
-                <div className="absolute bottom-4 left-4 max-w-64">
-                  <p className="mb-2 text-[10px] uppercase tracking-[0.18em] text-white/42">Frame 0{index + 1}</p>
-                  <p className="text-2xl font-medium leading-none">{frame.title}</p>
-                  <p className="mt-2 text-sm text-white/54">{frame.text}</p>
-                </div>
+      <div className="mx-auto max-w-[1680px]">
+        {lookbookFrames.map((frame, index) => (
+          <motion.article
+            key={frame.title}
+            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: index * 0.04, ease: "easeOut" }}
+            className={cn("grid border-b border-white/10 md:grid-cols-2", index % 2 === 1 && "md:[&>button]:order-2")}
+          >
+            <button type="button" onClick={() => onQuickView(products[index % products.length])} className={cn("group relative min-h-[30rem] overflow-hidden text-left sm:min-h-[38rem]", frameColors[index])}>
+              <Image src={frame.image} alt={frame.title} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover transition duration-700 group-hover:scale-[1.025]" />
+              <span className="absolute bottom-5 right-5 grid size-12 place-items-center rounded-full border border-[#fffdf9]/60 text-[#fffdf9] opacity-0 transition group-hover:opacity-100"><ArrowRight className="size-5" /></span>
+            </button>
+            <div className={cn("flex min-h-[16rem] flex-col justify-between p-5 sm:p-8 lg:p-10", frameColors[index], index === 0 || index === 5 ? "text-[#fffdf9]" : "text-[#171310]")}>
+              <div className="flex items-center justify-between gap-4 text-[10px] font-medium uppercase tracking-[0.2em] opacity-70">
+                <span>Frame 0{index + 1}</span>
+                <span>Studio 01</span>
               </div>
-            </motion.button>
-          ))}
-        </div>
-
-        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-white/12 pt-8">
-          <p className="max-w-sm text-sm uppercase leading-6 tracking-[0.16em] text-white/42">Every frame links back to a product. The shopping layer stays quiet.</p>
-          <Link href="/drop-01" className="inline-flex h-11 items-center gap-2 bg-white px-5 text-sm font-medium text-black transition hover:bg-[var(--frnk-tan)]">
-            View Drop 01 <ArrowRight className="size-4" />
-          </Link>
-        </div>
+              <div className="mt-12">
+                <h2 className="text-[clamp(3rem,6vw,5.5rem)] font-semibold leading-[0.82]">{frame.title}</h2>
+                <p className="mt-4 max-w-sm text-base leading-7 opacity-80">{frame.text}</p>
+              </div>
+            </div>
+          </motion.article>
+        ))}
       </div>
     </section>
   );
