@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { BrandLogo } from "@/components/brand-logo";
 import { getProductBySlug } from "@/lib/frnk-data";
 
-const campaignImage = "/images/frnkplus-exclusive-model-campaign.webp";
+const campaignImage = "/images/frnkplus-product-cap-studio.png";
 
 export const metadata = {
   title: "Exclusive | FRNK+",

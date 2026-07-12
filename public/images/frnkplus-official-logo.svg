@@ -9,7 +9,7 @@
     <text x="72" y="105" font-size="64" letter-spacing="-3">FR</text>
     <text x="72" y="164" font-size="64" letter-spacing="-3">NK</text>
   </g>
-  <g fill="none" stroke="#c6a27c" stroke-width="14" stroke-linecap="square">
+  <g fill="none" stroke="#171310" stroke-width="14" stroke-linecap="square">
     <path d="M196 182v40" />
     <path d="M176 202h40" />
   </g>

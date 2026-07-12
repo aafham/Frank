@@ -250,7 +250,7 @@ function HomeView({ reduceMotion }: { reduceMotion: boolean | null }) {
           </div>
         </div>
         <Link href="/exclusive" className="group relative min-h-[28rem] overflow-hidden bg-[var(--frnk-coffee)]">
-          <Image src="/images/frnkplus-exclusive-model-campaign.webp" alt="FRNK+ exclusive cap campaign" fill sizes="(min-width: 768px) 58vw, 100vw" className="object-cover transition duration-700 group-hover:scale-[1.025]" style={{ objectPosition: "center 18%" }} />
+          <Image src="/images/frnkplus-product-cap-studio.png" alt="FRNK+ exclusive cap campaign" fill sizes="(min-width: 768px) 58vw, 100vw" className="object-cover transition duration-700 group-hover:scale-[1.025]" style={{ objectPosition: "center 22%" }} />
           <span className="absolute bottom-5 right-5 grid size-14 place-items-center rounded-full bg-[var(--frnk-lime)] text-[10px] font-semibold uppercase tracking-[0.12em] text-[#171310] sm:bottom-8 sm:right-8 sm:size-18">Open</span>
         </Link>
       </section>
@@ -308,7 +308,7 @@ function CollectionView({
             <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--frnk-tan)]">FRNK+ Shop</p>
             <h1 className="mt-2 text-[clamp(3.4rem,7vw,6.8rem)] font-semibold leading-[0.82]">Studio 01</h1>
           </div>
-          <p className="max-w-sm text-sm leading-6 text-white/58">Five everyday pieces. One changing studio.</p>
+          <p className="max-w-sm text-sm leading-6 text-white/58">Six everyday pieces. One changing studio.</p>
         </div>
       </div>
 
